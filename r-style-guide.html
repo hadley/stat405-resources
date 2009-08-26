@@ -57,7 +57,7 @@
 
 <h2>Why is style important?</h2>
 
-<p>Good coding style is like used of correct punctuation when writing: you can manage without it, but it sure makes things easier to read. Similarly, with punctuation there are many possible variations.  The importance is in consistency.  After this class you are free to develop your own style, but these rules will make sure everybody starts off in the same place.</p>
+<p>Good coding style is like using correct punctuation when writing: you can manage without it, but it sure makes things easier to read. As with punctuation, there are many possible variations.  The importance is in consistency.  After this class you are free to develop your own style, but these rules will make sure everybody starts off in the same place.</p>
   
 <p>Writing code for communication is important because in this class your code will have one author (you!) but multiple readers:</p>
 
@@ -76,27 +76,33 @@
 
 <p>File names should end in <code>.r</code> and be meaningful.</p>
 
-<p>When handing an electronic copy of your assignment code, put your files in a directory called <code>firstname-lastname-hw-x</code> then email me a zip of that directory.<p>
+<p>When handing in an electronic copy of your assignment code, put your files in a directory called <code>firstname-lastname-hw-x</code> then email me a zip of that directory.<p>
  
 <div class="example"> 
   <dl>
     <dt>Good</dt>
     <dd><code>explore-diamonds.r</code></dd>
+    <dd><code>hadley-wickham-hw-1</code></dd>
     <dt>Bad</dt>
     <dd><code class="bad">foo.r</code></dd>
+    <dd><code class="bad">my-homework</code></dd>
   </dl>
 </div>
 
 <h3 id="identifiers">Identifiers</h3>
 
-<p>Variable and function names should be lowercase, and use <code>_</code> to separate words. Generally variable names should be nouns and function names should be verbs. Strive for concise but meaningful names (this is not easy!)</p>
+<p>Variable and function names should be lowercase. Use <code>_</code> to separate words within a name. Generally, variable names should be nouns and function names should be verbs. Strive for concise but meaningful names (this is not easy!)</p>
 
 <div class="example"> 
   <dl>
     <dt>Good</dt>
-    <dd><code></code></dd>
+    <dd><code>day_one</code></dd>
+    <dd><code>day_1</code></dd>
     <dt>Bad</dt>
-    <dd><code class="bad"></code></dd>
+    <dd><code class="bad">first_day_of_the_month</code></dd>
+    <dd><code class="bad">DayOne</code></dd>
+    <dd><code class="bad">dayone</code></dd>
+    <dd><code class="bad">djm1</code></dd>
   </dl>
 </div>
 
@@ -110,9 +116,9 @@
 <div class="example"> 
   <dl>
     <dt>Good</dt>
-    <dd><code></code></dd>
+    <dd><code> average &lt;- mean(feet / 12 + inches, na.rm = T) </code></dd>
     <dt>Bad</dt>
-    <dd><code class="bad"></code></dd>
+    <dd><code class="bad">average&lt;-mean(feet/12+inches,na.rm=T)</code></dd>
   </dl>
 </div>
 
@@ -122,6 +128,7 @@
   <dl>
     <dt>Good</dt>
     <dd><code>if (debug)</code></dd>
+    <dd><code>plot(x, y)</code></dd>
     <dt>Bad</dt>
     <dd><code class="bad">if(debug)</code></dd>
     <dd><code class="bad">plot (x, y)</code></dd>
@@ -135,6 +142,11 @@
 <code>list(
   x = call_this_long_function(a, b), 
   y = a * e / d ^ f)
+</code></pre>
+<pre>
+<code>list(
+  total = a + b + c, 
+  mean  = (a + b + c) / n)
 </code></pre>
 </div>
 
@@ -187,7 +199,7 @@ if (y &lt; 0 &amp;&amp; debug) message("Y is negative")
 
 <h3 id="linelength">Line length</h3>
 
-<p>Keep your lines less than 80 characters.  This is the amount that will fit comfortably on a printed page at a reasonable size. If you find you are running out of room, this is probably an indication you need to encapsulate some of the work in a separate function.</p>
+<p>Keep your lines less than 80 characters.  This is the amount that will fit comfortably on a printed page at a reasonable size. If you find you are running out of room, this is probably an indication that you should encapsulate some of the work in a separate function.</p>
 
 <h3 id="assignment">Assignment</h3>
 
