@@ -18,65 +18,23 @@
 
 <p>Open gedit by typing <code>gedit &amp;</code> in the terminal.  Open Edit | Preferences and then make sure the settings match those in <a href="gedit-set-up.pdf">this pdf</a>.</p>
 
-<h2>Command line &amp; R settings</h2>
+<h2>Command line settings</h2>
 
-<p>Run <code>gedit .cshrc &amp;</code> and copy in the following code:</p>
+<!-- 
+  zip -jr dotfiles.zip dotfiles/
+-->
 
-<pre>
-test -t 0 &amp;&amp; exec /bin/bash
-</pre>
-<p>Save and close the file.</p>
-
-
-<p>Run <code>gedit .bashrc &amp;</code> and copy in the following code:</p>
+<p>In the terminal, run the following code to install all the command-line settings that you need:</p>
 
 <pre>
-export R_LIBS=$HOME/R
-alias R='R --no-save --no-restore-data --quiet'
-
-export INPUTRC=~/.inputrc 
-export EDITOR="gedit" 
-
-# Save lots of history 
-export HISTFILESIZE=10000 
-export HISTSIZE=10000 
-export HISTCONTROL=erasedups 
-shopt -s histappend 
-
-# Show which directory you're working in 
-export PS1="\W: "
+curl http://had.co.nz/stat405/resources/dotfiles.zip -o dotfiles.zip
+unzip dotfiles.zip
+rm dotfiles.zip
 </pre>
-
-<p>Save and close the file.</p>
-
-
-<p>Run <code>gedit .Rprofile &amp;</code> and copy in the following code:</p>
-
-<pre>
-.First &lt;- function() {
-  options("repos" = c(CRAN = "http://cran.r-project.org/"))
-}
-</pre>
-
-<p>Run <code>gedit .inputrc &amp;</code> and copy in the following code:</p>
-
-<p>Save and close the file.</p>
-
-<pre>
-set completion-ignore-case on 
-$if Bash 
-  set show-all-if-ambiguous on 
-$endif 
-
-# Search backwards and forwards in history 
-# using up &amp; down keys 
-"\e[A": history-search-backward 
-"\e[B": history-search-forward
-</pre>
-
-<p>Save and close the file.</p>
 
 <p>Close and re-open the terminal.</p>
+
+<h2>Testing</h2>
 
 <p>If everything is set up correctly, the following should run without errors</p>
 
