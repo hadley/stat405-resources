@@ -1,0 +1,1 @@
+test -t 0 &amp;&amp; exec /bin/bash
