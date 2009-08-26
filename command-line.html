@@ -15,10 +15,11 @@
 <h2>Linux</h2>
 
 <!-- 
-  zip -jr dotfiles.zip dotfiles/
+  zip -jr linux-dotfiles.zip linux-dotfiles/
+  zip -jr mac-dotfiles.zip linux-dotfiles/
 -->
 
-<p>In the terminal, run the following code to install all the command-line settings that you need:</p>
+<p>In the terminal, run the following code to install the command-line settings that you need:</p>
 
 <pre>
 curl http://had.co.nz/stat405/resources/linux-dotfiles.zip -o dotfiles.zip
@@ -30,17 +31,26 @@ rm dotfiles.zip
 
 <h2>Mac</h2>
 
-<p>You are welcome to 
+<p>Before run the following code, check to see if <code>.profile</code> already exists by running <code>ls -a .profile</code>.  If it does, see me.</p>
+
+<p>In the terminal, run the following code to install the command-line settings that you need:</p>
+
+<pre>
+curl http://had.co.nz/stat405/resources/mac-dotfiles.zip -o dotfiles.zip
+unzip dotfiles.zip
+rm dotfiles.zip
+</pre>
 
 <h2>Testing</h2>
 
-<p>If everything is set up correctly, the following should run without errors</p>
+<p>If everything is set up correctly, the following should produce a scatteplot.</p>
 
 <pre>
 R
 install.packages("ggplot2")
 # Answer y if it asks a question
 library(ggplot2)
+qplot(cty, hwy, data = mtcars)
 </pre>
 
 </div>
