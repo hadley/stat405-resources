@@ -1,1 +1,1 @@
-test -t 0 &amp;&amp; exec /bin/bash
+test -t 0 && exec /bin/bash
