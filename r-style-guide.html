@@ -166,7 +166,7 @@
 
 <h3 id="curlybraces">Curly braces</h3>
 
-<p>An opening curly brace should never go on its own line and should always be followed by a new line; a closing curly brace should always go on its own line.</p>
+<p>An opening curly brace should never go on its own line and should always be followed by a new line; a closing curly brace should always go on its own line, unless followed by <code>else</code>.</p>
 
 <p>Always indent the code inside the curly braces.</p>
 
@@ -179,12 +179,25 @@
 if (y &lt; 0 &amp;&amp; debug) {
   message("Y is negative")
 }
+
+if (y == 0) {
+  log(x)
+} else {
+  y ^ x
+}
 </code></pre></dd>
     <dt>Bad</dt>
     <dd><pre>
 <code class="bad">
 if (y &lt; 0 &amp;&amp; debug)
 message("Y is negative")
+
+if (y == 0) {
+  log(x)
+} 
+else {
+  y ^ x
+}
 </code></pre></dd>
     <dd><pre>
 <code class="bad">
@@ -262,7 +275,7 @@ if (y &lt; 0 &amp;&amp; debug) message("Y is negative")
       <li><a href="#identifiers">Identifiers</a> use _ to separate words</li>
       <li>Put <a href="#spacing">spaces</a> around binary operators and after commas.</li>
     
-      <li>The first <a href="#curlybraces">curly braces</a> should go on the same line and last on its own line.  Always indent code inside braces.</li>
+      <li>The first <a href="#curlybraces">curly braces</a> should go on the same line and last on its own line (unless followed by <code>else</code>).  Always indent code inside braces.</li>
 
       <li>Use spaces, not tabs, when <a href="#indentation">indenting</a>.</li>
 
