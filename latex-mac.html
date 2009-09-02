@@ -1,0 +1,51 @@
+<html>
+
+<head>
+	<title>latex on the mac. stat405. had.co.nz</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/header.html"); ?>
+<div id="wrap">
+
+<h1>stat405</h1>
+<h2 class="subhead">Latex on the mac</h2>
+
+<h2>Installation</h2>
+
+<p>Download and install <a href="http://www.tug.org/mactex/">mactex</a> (1.2 gig).</p>
+
+<h2>Edit</h2>
+
+<p>Open a latex file by double-clicking it in the finder. The texshop editor, shown below, will pop up.  Notice the syntax highlighting shows comments in red, and latex commands in blue.</p>
+
+<p><img src="latex/texshop.png" width="584" height="618"></p>
+
+<h2>Compile</h2>
+
+<p>Click the typeset button, or press &#8984;-T. An error console, as shown below, will pop up and display progress.</p>
+
+<p><img src="latex/texshop-console.png" width="597" height="456"></p>
+
+<p>If there is an error, the console will look something like this:</p>
+
+<p><img src="latex/texshop-error.png" width="597" height="456"></p>
+
+<p>Note the line that starts <code>l.30 \begindocument</code>.  This is telling you that latex thinks the problem occured on line 30 (although note that's not always correct about where the error occurs).  You can click the "goto error" button to jump to this line in the editor.</p>
+
+<h2>Preview</h2>
+
+<p>The preview window will open automatically if compilation was successful.</p>
+
+<p>Tip: you can &#8984;-click text in preview to jump to the code in the editor, or &#8984;-click text in the editor to jump to the results in the preview.</p>
+
+<h2>Learn more</h2>
+
+<p>Learn to use texshop more effectively by reading the help files, particularly "First Steps with TeXshop", and running the demos.</p>
+
+</div>
+
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/stat405/footer.html"); ?>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+
+<head>
+	<title>latex on linux. stat405. had.co.nz</title>
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/header.html"); ?>
+<div id="wrap">
+
+<h1>stat405</h1>
+<h2 class="subhead">Latex on linux</h2>
+
+<h2>Installation</h2>
+
+<p>It's already done for you :)</p>
+
+<h2>Edit</h2>
+
+<p>Open your latex files in gedit, e.g. <code>gedit template.tex &amp;</code>.</p>
+
+<h2>Compile</h2>
+
+<p>In the terminal, navigate to the directory where the latex file lives.  
+Run <code>pdflatex your-file-name.tex</code>.  Latex will output progress to the terminal.</p>
+
+<p>Unfortunately it's really hard to see any warnings or errors, because they are buried in rafts of uninformative material.  If you pdf is not built successfully, the best thing is to open the log file in gedit (<code>gedit your-file-name.log</code>) and search for "error".</p>
+
+<h2>Preview</h2>
+
+<p>If successful, the compilation step will have created a pdf called <code>your-file-name.pdf</code>.  Preview it by running <code>evince your-file-name.pdf</code></p>
+
+<h2>Learn more</h2>
+
+<p>Remember the following useful keyboard shortcuts:</p>
+
+<ul>
+  <li>Up arrow: to go back to something you have typed previously.</li>
+  <li>Tab: to complete file names</li>
+</ul>
+
+</div>
+
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/stat405/footer.html"); ?>
+</body>
+</html>
