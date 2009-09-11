@@ -1,0 +1,593 @@
+\documentclass{article}
+\usepackage{amsbsy,amscd,amsfonts,amsgen,amsmath,amsopn,amssymb,amstext,amsthm,amsxtra}
+\usepackage{graphicx}
+\usepackage{verbatim}
+\usepackage{multicol}
+\usepackage{fullpage}
+\begin{document}
+
+\title{Function Drills with Answers}
+\author{Statistics 405}
+\date{\today}
+\maketitle
+
+%-------------------------------------------------------------------
+% Begin entering your LaTeX document content here...
+
+\noindent Write a simple function in R for each of the following tasks. 
+\begin{enumerate}
+\item Find the sum of a numeric vector (without using \verb!sum()!).
+  \begin{quote}
+     \begin{verbatim}
+	my_sum <- function(vec){
+	  total <- 0
+	  for (i in 1:length(vec)){
+	  	total <- total + vec[i]
+	  }
+	  total
+	}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the mean of a numeric vector (without using \verb!mean()!).
+  \begin{quote}
+    \begin{verbatim}
+my_mean <- function(vec){
+  my_sum(vec)/length(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the variance of a numeric vector (without using \verb!var()!).
+  \begin{quote}
+    \begin{verbatim}
+my_var <- function(vec){
+  xbar <- my_mean(vec)
+  n <- length(vec)
+  sum <- 0
+  
+  for (i in 1:n){
+  	sum <- sum + (vec[i] - xbar) ^ 2
+  }
+  
+  # let's use n-1 so we can compare with R's var(). 
+  # This is the sample variance
+  sum / (n - 1)
+ }	
+
+    \end{verbatim}
+  \end{quote}
+
+\item Automatically create a scatterplot matrix with the variables in a given data frame.
+  \begin{quote}
+    \begin{verbatim}
+scatterplot <- function(df){
+  library(ggplot2)
+  plotmatrix(df)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Automatically create a histogram of a vector.
+  \begin{quote}
+    \begin{verbatim}
+my_hist <- function(vec){
+  hist(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Automatically create a histogram of a vector with the given number of bins.
+  \begin{quote}
+    \begin{verbatim}
+better_hist <- function(vec, n){
+  hist(vec, breaks = n)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the range of a vector.
+  \begin{quote}
+    \begin{verbatim}
+my_range <- function(vec){
+  max(vec) - min(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the least common multiple of two numbers.
+  \begin{quote}
+    \begin{verbatim}
+LCM <- function(a,b){
+  test <- a * c(1:b)
+  multiples <- test[integer(test/b)] 
+  min(multiples)
+} 
+    \end{verbatim}
+  \end{quote}
+
+\item Test whether a number is even.
+  \begin{quote}
+    \begin{verbatim}
+is.even <- function(num){
+  num %% 2 == 0
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Test whether a number is odd.
+  \begin{quote}
+    \begin{verbatim}
+is.odd <- function(num){
+  num %% 2 == 1
+}
+    \end{verbatim}
+  \end{quote}
+
+\item If a number is odd add one to it.
+  \begin{quote}
+    \begin{verbatim}
+one_to_odd <- function(num){
+  if (is.odd(num))
+    return(num + 1)
+  return(num)
+} 
+    \end{verbatim}
+  \end{quote}
+
+\item If any number in a numeric vector is odd, add one to it
+  \begin{quote}
+    \begin{verbatim}
+one_to_odd2 <- function(vec){
+  vec[is.odd(vec)] <- vec[is.odd(vec)] + 1
+  vec
+}	
+
+# note: this function is better than the previous one
+# It works for numbers AND vectors, and it is simpler
+    \end{verbatim}
+  \end{quote}
+
+\item Test whether a number is an integer.
+  \begin{quote}
+    \begin{verbatim}
+integer <- function(a){
+  trunc(a) == a
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Separate the integer and decimal parts of a number, return them in a vector of length two.
+  \begin{quote}
+    \begin{verbatim}
+split_num <- function(num){
+  c(trunc(num), num - trunc(num))
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return the given vector with all NA's removed.
+  \begin{quote}
+    \begin{verbatim}
+clean <- function(vec){
+  na.omit(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+
+
+\item Return the row numbers of rows in a data frame that contain NA's.
+  \begin{quote}
+    \begin{verbatim}
+get_NAs <- function(df){
+  new <- na.omit(df)
+  setdiff(row.names(df), row.names(new))
+}
+    \end{verbatim}
+  \end{quote}
+  
+\item Return the actual rows of a data frame that contain NA's.
+  \begin{quote}
+    \begin{verbatim}
+get_NAs2 <- function(df){
+  new <- na.omit(df)
+  rows <- setdiff(row.names(df), row.names(new))
+  df[rows,]
+}
+    \end{verbatim}
+  \end{quote}
+  
+\item Divide each element in a numeric vector by the vector's length.
+  \begin{quote}
+    \begin{verbatim}
+div_vec <- function(vec){
+  vec / length(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Create a new vector by repeating a given vector a given number of times.
+  \begin{quote}
+    \begin{verbatim}
+rep_vec <- function(vec, n){
+  rep(vec, n)	
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Double each element in a vector (e.g., turn \emph{a,b,c,...} into \emph{a, a, b, b, c,...}).
+  \begin{quote}
+    \begin{verbatim}
+rep_vec2 <- function(vec, n){
+  vec[rep(1:length(vec), each = n)]
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the mean of a vector that contains one or more NA's by ignoring any NA's (without using \verb!mean()!).
+  \begin{quote}
+    \begin{verbatim}
+my_mean2 <- function(vec){
+  my_mean(na.omit(vec))
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Randomly return one of the following phrases, "Ace", "King" or "Queen" with equal probability of returning each.
+  \begin{quote}
+    \begin{verbatim}
+random <- function(){
+  sample(c("Ace", "King", "Queen"), 1)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Randomly return one of the following phrases, "Ace", "King" or "Queen" with twice as much probability of returning "Ace" as either "King" or "Queen."
+  \begin{quote}
+    \begin{verbatim}
+ random2 <- function(){
+  sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Take any character string and add "...in Stat 405" to the end.
+  \begin{quote}
+    \begin{verbatim}
+fortune_cookie <- function(fortune){
+  paste(fortune, "...in Stat405.")
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Take any character string and add "...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.
+  \begin{quote}
+    \begin{verbatim}
+fortune_cookie <- function(fortune){
+  stopifnot(is.character(fortune))
+  paste(fortune, "...in Stat405.")
+}	
+    \end{verbatim}
+  \end{quote}
+
+
+\item Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.
+  \begin{quote}
+    \begin{verbatim}
+save_plot <- function(name){
+  filename <- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = 6, height = 6)
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Save the current graph with a given width and height as a pdf with the inputted name.
+  \begin{quote}
+    \begin{verbatim}
+save_plot2 <- function(name, width, height){
+  filename <- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = width, height = height)
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Identify whether an object is a logical, character, or numeric object.
+  \begin{quote}
+    \begin{verbatim}
+type <- function(obj){
+  mode(obj)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return the number of unique permutations that can be from a given vector (caution: don't use large vectors).
+  \begin{quote}
+    \begin{verbatim}
+num_seqs <- function(vec){
+  n <- length(vec)
+  factorial(n)
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the number of unique sets that can be made from an inputted vector.
+  \begin{quote}
+    \begin{verbatim}
+num_sets <- function(vec){
+  vec <- unique(vec)
+  n <- length(vec)
+  my_sum(2 ^ c(0:(n-1)))
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return whichever the entered number is closest to: 0 or 1000.
+  \begin{quote}
+    \begin{verbatim}
+closest <- function(a){
+  if (a > 1000){
+  	a <- 1000
+  }
+  
+  round(a, -3)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return the circumference of a circle with the given radius.
+  \begin{quote}
+    \begin{verbatim}
+c_circ <- function(r){
+  2 * pi * r
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the area of a circle with the given radius.
+  \begin{quote}
+    \begin{verbatim}
+c_area <- function(r){
+  pi * r ^ 2
+}
+    \end{verbatim}
+  \end{quote}
+  
+  \item Return the area of a circle with the given radius.
+  \begin{quote}
+    \begin{verbatim}
+c_vol <- function(r){
+  4 / 3 * pi * r ^ 3
+}	    
+    \end{verbatim}
+  \end{quote}
+  
+\item Return the circumference, area (of the largest cross-section), and volume of a sphere with the given radius. Each should be labelled in the functions output.
+  \begin{quote}
+    \begin{verbatim}
+c_stats <- function(r){
+  c(circumference = c_circ(r),
+    area = c_area(r),
+    volume = c_vol(r)
+  )
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.
+  \begin{quote}
+    \begin{verbatim}
+combos <- function(df){
+  combinations <- table(df[,1], df[,2])
+  df_counts <- as.data.frame(combinations)
+  names(df_counts) <- c(names(df), "count")
+  df_counts <- subset(df_counts, count > 0)
+  df_counts
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Automatically plot the above results with each variable on an axis and the number of occurrences (counts) represented by color.
+  \begin{quote}
+    \begin{verbatim}
+colorful_way_to_get_around_overplotting <- function(df){
+  df_counts <- combos(df)
+  df_counts <- within(df_counts, {
+    x <- as.numeric(as.character(df_counts[,1]))
+    y <- as.numeric(as.character(df_counts[,1]))
+  })
+  qplot(x, y, data = df_counts, colour = count)
+}     
+    \end{verbatim}
+  \end{quote}
+
+\item Create a new vector where each \emph{ith} element is the sum of the first \emph{i} elements of the given vector.
+  \begin{quote}
+    \begin{verbatim}
+cumsum <- function(vec){
+  new <- vector(length = length(vec))
+  for(i in 1:length(vec)){
+  	new[i] <- my_sum(vec[1:i])
+  }
+  new
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Display the number of groups of size n can be made from the inputted vector of length k.
+  \begin{quote}
+    \begin{verbatim}
+n_choose_k <- function(n, k){
+  factorial(n) / (factorial(k) * factorial(n - k))
+}
+    
+    \end{verbatim}
+  \end{quote}
+
+\item Given the coefficients of a quadratic polynomial, return the roots.
+  \begin{quote}
+    \begin{verbatim}
+quad_formula <- function(a, b, c){
+  stopifnot(b ^ 2 >= 4 * a * c)
+  c((-b - sqrt(b ^ 2 - 4 * a * c)) / (2 * a),
+    (-b + sqrt(b ^ 2 - 4 * a * c)) / (2 * a))
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the lowest positive value of a vector
+  \begin{quote}
+    \begin{verbatim}
+min_pos <- function(vec){
+  pos <- vec[vec > 0]
+  min(pos)
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the second lowest positive value of a vector
+  \begin{quote}
+    \begin{verbatim}
+min2_pos <- function(vec){
+  pos <- vec[vec > 0]
+  pos <- pos[-which(pos == min(pos))]
+  min(pos)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Select the number in a vector that is the greatest distance from the first element of the vector
+  \begin{quote}
+    \begin{verbatim}
+select <- function(vec){
+  distance <- abs(vec - vec[1])
+  vec[which(distance == max(distance))]
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return whether a vector of numbers is right skewed or left skewed by comparing its mean and median.
+  \begin{quote}
+    \begin{verbatim}
+# note: this concept only works for large amounts of skew - Garrett
+skew <- function(vec){
+  if (mean(vec) < median(vec))
+    return("left-skewed")
+  if (mean(vec) > median(vec))
+    return("right-skewed")
+  return("symmetric")
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the (statistical) mode of a vector.
+  \begin{quote}
+    \begin{verbatim}
+mode_vec <- function(vec){
+  counts <- as.data.frame(table(vec))$Freq
+  vec[which(counts == max(counts))]
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Index a series of observations by the first observation (hint: express each observation as a percentage of the first observation).
+  \begin{quote}
+    \begin{verbatim}
+how_to_index <- function(vec){
+  vec / vec[1] * 100
+}     
+    \end{verbatim}
+  \end{quote}
+
+\item Find the determinant of a four by four matrix.
+  \begin{quote}
+    \begin{verbatim}
+determinant <- function(matrix){
+  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Given a numeric vector of length 100, determine which element occurs at the 70th percentile.
+  \begin{quote}
+    \begin{verbatim}
+ptile100 <- function(vec){
+  vec[order(vec)]
+  vec[70]
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Given a numeric vector of length 10, determine which element occurs at the 70th percentile.
+  \begin{quote}
+    \begin{verbatim}
+ptile10 <- function(vec){
+  vec[order(vec)]
+  vec[7]
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Given a numeric vector of length 10, determine which element occurs at the 70th percentile.
+  \begin{quote}
+    \begin{verbatim}
+ptile <- function(vec){
+  vec[order(vec)]
+  vec[round(.7 * length(vec), 1)]
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv"
+  \begin{quote}
+    \begin{verbatim}
+save_file <- function(df){
+  filename <- paste(substitute(df), "csv", sep = ".")
+
+  # best method to avoid adding row numbers
+  write.table(file, filename, sep = ",", row = F)
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Return a vector with its elements reordered in a random manner.
+  \begin{quote}
+    \begin{verbatim}
+shuffle <- function(vec){
+  sample(vec, length(vec), replace = F) 
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return a vector with its elements ordered from smallest to largest.
+  \begin{quote}
+    \begin{verbatim}
+order1 <- function(vec){
+  vec[order(vec)]
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Return a vector with its elements ordered largest to smallest.
+  \begin{quote}
+    \begin{verbatim}
+order2 <- function(vec){
+  vec[order(-vec)]
+}
+    \end{verbatim}
+  \end{quote}
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
