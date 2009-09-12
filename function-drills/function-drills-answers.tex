@@ -16,95 +16,88 @@
 
 \noindent Write a simple function in R for each of the following tasks. 
 \begin{enumerate}
-\item Find the sum of a numeric vector (without using \verb!sum()!).
+
+\item Return the circumference of a circle with the given radius.
   \begin{quote}
-     \begin{verbatim}
-	my_sum <- function(vec){
-	  total <- 0
-	  for (i in 1:length(vec)){
-	  	total <- total + vec[i]
-	  }
-	  total
-	}
+    \begin{verbatim}
+c_circ <- function(r){
+  2 * pi * r
+}    
     \end{verbatim}
   \end{quote}
 
-\item Find the mean of a numeric vector (without using \verb!mean()!).
+\item Return the area of a circle with the given radius.
   \begin{quote}
     \begin{verbatim}
-my_mean <- function(vec){
-  my_sum(vec)/length(vec)
+c_area <- function(r){
+  pi * r ^ 2
 }
     \end{verbatim}
   \end{quote}
-
-\item Find the variance of a numeric vector (without using \verb!var()!).
-  \begin{quote}
-    \begin{verbatim}
-my_var <- function(vec){
-  xbar <- my_mean(vec)
-  n <- length(vec)
-  sum <- 0
   
-  for (i in 1:n){
-  	sum <- sum + (vec[i] - xbar) ^ 2
-  }
+  \item Return the area of a circle with the given radius.
+  \begin{quote}
+    \begin{verbatim}
+c_vol <- function(r){
+  4 / 3 * pi * r ^ 3
+}	    
+    \end{verbatim}
+  \end{quote}
   
-  # let's use n-1 so we can compare with R's var(). 
-  # This is the sample variance
-  sum / (n - 1)
- }	
-
+\item Return the circumference, area (of the largest cross-section), and volume of a sphere with the given radius. Each should be labelled in the functions output.
+  \begin{quote}
+    \begin{verbatim}
+c_stats <- function(r){
+  c(circumference = c_circ(r),
+    area = c_area(r),
+    volume = c_vol(r)
+  )
+}    
     \end{verbatim}
   \end{quote}
 
-\item Automatically create a scatterplot matrix with the variables in a given data frame.
+\item Given the coefficients of a quadratic polynomial, return the roots.
   \begin{quote}
     \begin{verbatim}
-scatterplot <- function(df){
-  library(ggplot2)
-  plotmatrix(df)
+quad_formula <- function(a, b, c){
+  stopifnot(b ^ 2 >= 4 * a * c)
+  c((-b - sqrt(b ^ 2 - 4 * a * c)) / (2 * a),
+    (-b + sqrt(b ^ 2 - 4 * a * c)) / (2 * a))
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the lowest positive value of a vector
+  \begin{quote}
+    \begin{verbatim}
+min_pos <- function(vec){
+  pos <- vec[vec > 0]
+  min(pos)
+}    
+    \end{verbatim}
+  \end{quote}
+
+\item Return the second lowest positive value of a vector
+  \begin{quote}
+    \begin{verbatim}
+min2_pos <- function(vec){
+  pos <- vec[vec > 0]
+  pos <- pos[-which(pos == min(pos))]
+  min(pos)
 }
     \end{verbatim}
   \end{quote}
 
-\item Automatically create a histogram of a vector.
+
+\item Divide each element in a numeric vector by the vector's length.
   \begin{quote}
     \begin{verbatim}
-my_hist <- function(vec){
-  hist(vec)
+div_vec <- function(vec){
+  vec / length(vec)
 }
     \end{verbatim}
   \end{quote}
 
-\item Automatically create a histogram of a vector with the given number of bins.
-  \begin{quote}
-    \begin{verbatim}
-better_hist <- function(vec, n){
-  hist(vec, breaks = n)
-}
-    \end{verbatim}
-  \end{quote}
-
-\item Find the range of a vector.
-  \begin{quote}
-    \begin{verbatim}
-my_range <- function(vec){
-  max(vec) - min(vec)
-}
-    \end{verbatim}
-  \end{quote}
-
-\item Find the least common multiple of two numbers.
-  \begin{quote}
-    \begin{verbatim}
-LCM <- function(a,b){
-  test <- a * c(1:b)
-  multiples <- test[integer(test/b)] 
-  min(multiples)
-} 
-    \end{verbatim}
-  \end{quote}
 
 \item Test whether a number is even.
   \begin{quote}
@@ -115,7 +108,7 @@ is.even <- function(num){
 
     \end{verbatim}
   \end{quote}
-
+  
 \item Test whether a number is odd.
   \begin{quote}
     \begin{verbatim}
@@ -158,6 +151,130 @@ integer <- function(a){
     \end{verbatim}
   \end{quote}
 
+
+\item Find the range of a vector.
+  \begin{quote}
+    \begin{verbatim}
+my_range <- function(vec){
+  max(vec) - min(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the sum of a numeric vector (without using \verb!sum()!).
+  \begin{quote}
+     \begin{verbatim}
+	my_sum <- function(vec){
+	  total <- 0
+	  for (i in 1:length(vec)){
+	  	total <- total + vec[i]
+	  }
+	  total
+	}
+    \end{verbatim}
+  \end{quote}
+
+\item Find the mean of a numeric vector (without using \verb!mean()!).
+  \begin{quote}
+    \begin{verbatim}
+my_mean <- function(vec){
+  my_sum(vec)/length(vec)
+}
+    \end{verbatim}
+  \end{quote}
+  
+\item Find the mean of a vector that contains one or more NA's by ignoring any NA's (without using \verb!mean()!).
+  \begin{quote}
+    \begin{verbatim}
+my_mean2 <- function(vec){
+  my_mean(na.omit(vec))
+}
+
+    \end{verbatim}
+  \end{quote}
+
+\item Find the variance of a numeric vector (without using \verb!var()!).
+  \begin{quote}
+    \begin{verbatim}
+my_var <- function(vec){
+  xbar <- my_mean(vec)
+  n <- length(vec)
+  sum <- 0
+  
+  for (i in 1:n){
+  	sum <- sum + (vec[i] - xbar) ^ 2
+  }
+  
+  # let's use n-1 so we can compare with R's var(). 
+  # This is the sample variance
+  sum / (n - 1)
+ }	
+
+    \end{verbatim}
+  \end{quote}
+
+
+
+\item Automatically create a histogram of a vector.
+  \begin{quote}
+    \begin{verbatim}
+my_hist <- function(vec){
+  hist(vec)
+}
+    \end{verbatim}
+  \end{quote}
+
+\item Automatically create a histogram of a vector with the given number of bins.
+  \begin{quote}
+    \begin{verbatim}
+better_hist <- function(vec, n){
+  hist(vec, breaks = n)
+}
+    \end{verbatim}
+  \end{quote}
+  
+\item Automatically create a scatterplot matrix with the variables in a given data frame.
+  \begin{quote}
+    \begin{verbatim}
+scatterplot <- function(df){
+  library(ggplot2)
+  plotmatrix(df)
+}
+    \end{verbatim}
+  \end{quote}
+  
+
+\item Find the least common multiple of two numbers.
+  \begin{quote}
+    \begin{verbatim}
+LCM <- function(a,b){
+  test <- a * c(1:b)
+  multiples <- test[integer(test/b)] 
+  min(multiples)
+} 
+    \end{verbatim}
+  \end{quote}
+
+\item Index a series of observations by the first observation (hint: express each observation as a percentage of the first observation).
+  \begin{quote}
+    \begin{verbatim}
+how_to_index <- function(vec){
+  vec / vec[1] * 100
+}     
+    \end{verbatim}
+  \end{quote}
+
+\item Find the determinant of a four by four matrix.
+  \begin{quote}
+    \begin{verbatim}
+determinant <- function(matrix){
+  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
+}    
+    \end{verbatim}
+  \end{quote}
+
+
+  
 \item Separate the integer and decimal parts of a number, return them in a vector of length two.
   \begin{quote}
     \begin{verbatim}
@@ -199,14 +316,6 @@ get_NAs2 <- function(df){
     \end{verbatim}
   \end{quote}
   
-\item Divide each element in a numeric vector by the vector's length.
-  \begin{quote}
-    \begin{verbatim}
-div_vec <- function(vec){
-  vec / length(vec)
-}
-    \end{verbatim}
-  \end{quote}
 
 \item Create a new vector by repeating a given vector a given number of times.
   \begin{quote}
@@ -226,17 +335,8 @@ rep_vec2 <- function(vec, n){
     \end{verbatim}
   \end{quote}
 
-\item Find the mean of a vector that contains one or more NA's by ignoring any NA's (without using \verb!mean()!).
-  \begin{quote}
-    \begin{verbatim}
-my_mean2 <- function(vec){
-  my_mean(na.omit(vec))
-}
 
-    \end{verbatim}
-  \end{quote}
-
-\item Randomly return one of the following phrases, "Ace", "King" or "Queen" with equal probability of returning each.
+\item Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with equal probability of returning each.
   \begin{quote}
     \begin{verbatim}
 random <- function(){
@@ -245,7 +345,7 @@ random <- function(){
     \end{verbatim}
   \end{quote}
 
-\item Randomly return one of the following phrases, "Ace", "King" or "Queen" with twice as much probability of returning "Ace" as either "King" or "Queen."
+\item Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with twice as much probability of returning ``Ace" as either ``King" or ``Queen."
   \begin{quote}
     \begin{verbatim}
  random2 <- function(){
@@ -254,7 +354,7 @@ random <- function(){
     \end{verbatim}
   \end{quote}
 
-\item Take any character string and add "...in Stat 405" to the end.
+\item Take any character string and add ``...in Stat 405" to the end.
   \begin{quote}
     \begin{verbatim}
 fortune_cookie <- function(fortune){
@@ -263,7 +363,7 @@ fortune_cookie <- function(fortune){
     \end{verbatim}
   \end{quote}
 
-\item Take any character string and add "...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.
+\item Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.
   \begin{quote}
     \begin{verbatim}
 fortune_cookie <- function(fortune){
@@ -293,6 +393,19 @@ save_plot2 <- function(name, width, height){
 }    
     \end{verbatim}
   \end{quote}
+  
+\item Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv"
+  \begin{quote}
+    \begin{verbatim}
+save_file <- function(df){
+  filename <- paste(substitute(df), "csv", sep = ".")
+
+  # best method to avoid adding row numbers
+  write.table(file, filename, sep = ",", row = F)
+}
+
+    \end{verbatim}
+  \end{quote}
 
 \item Identify whether an object is a logical, character, or numeric object.
   \begin{quote}
@@ -300,6 +413,16 @@ save_plot2 <- function(name, width, height){
 type <- function(obj){
   mode(obj)
 }
+    \end{verbatim}
+  \end{quote}
+  
+\item Display the number of groups of size n can be made from the inputted vector of length k.
+  \begin{quote}
+    \begin{verbatim}
+n_choose_k <- function(n, k){
+  factorial(n) / (factorial(k) * factorial(n - k))
+}
+    
     \end{verbatim}
   \end{quote}
 
@@ -337,45 +460,6 @@ closest <- function(a){
     \end{verbatim}
   \end{quote}
 
-\item Return the circumference of a circle with the given radius.
-  \begin{quote}
-    \begin{verbatim}
-c_circ <- function(r){
-  2 * pi * r
-}    
-    \end{verbatim}
-  \end{quote}
-
-\item Return the area of a circle with the given radius.
-  \begin{quote}
-    \begin{verbatim}
-c_area <- function(r){
-  pi * r ^ 2
-}
-    \end{verbatim}
-  \end{quote}
-  
-  \item Return the area of a circle with the given radius.
-  \begin{quote}
-    \begin{verbatim}
-c_vol <- function(r){
-  4 / 3 * pi * r ^ 3
-}	    
-    \end{verbatim}
-  \end{quote}
-  
-\item Return the circumference, area (of the largest cross-section), and volume of a sphere with the given radius. Each should be labelled in the functions output.
-  \begin{quote}
-    \begin{verbatim}
-c_stats <- function(r){
-  c(circumference = c_circ(r),
-    area = c_area(r),
-    volume = c_vol(r)
-  )
-}    
-    \end{verbatim}
-  \end{quote}
-
 \item Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.
   \begin{quote}
     \begin{verbatim}
@@ -392,7 +476,7 @@ combos <- function(df){
 \item Automatically plot the above results with each variable on an axis and the number of occurrences (counts) represented by color.
   \begin{quote}
     \begin{verbatim}
-colorful_way_to_get_around_overplotting <- function(df){
+colorful_counts <- function(df){
   df_counts <- combos(df)
   df_counts <- within(df_counts, {
     x <- as.numeric(as.character(df_counts[,1]))
@@ -416,47 +500,6 @@ cumsum <- function(vec){
     \end{verbatim}
   \end{quote}
 
-\item Display the number of groups of size n can be made from the inputted vector of length k.
-  \begin{quote}
-    \begin{verbatim}
-n_choose_k <- function(n, k){
-  factorial(n) / (factorial(k) * factorial(n - k))
-}
-    
-    \end{verbatim}
-  \end{quote}
-
-\item Given the coefficients of a quadratic polynomial, return the roots.
-  \begin{quote}
-    \begin{verbatim}
-quad_formula <- function(a, b, c){
-  stopifnot(b ^ 2 >= 4 * a * c)
-  c((-b - sqrt(b ^ 2 - 4 * a * c)) / (2 * a),
-    (-b + sqrt(b ^ 2 - 4 * a * c)) / (2 * a))
-}    
-    \end{verbatim}
-  \end{quote}
-
-\item Return the lowest positive value of a vector
-  \begin{quote}
-    \begin{verbatim}
-min_pos <- function(vec){
-  pos <- vec[vec > 0]
-  min(pos)
-}    
-    \end{verbatim}
-  \end{quote}
-
-\item Return the second lowest positive value of a vector
-  \begin{quote}
-    \begin{verbatim}
-min2_pos <- function(vec){
-  pos <- vec[vec > 0]
-  pos <- pos[-which(pos == min(pos))]
-  min(pos)
-}
-    \end{verbatim}
-  \end{quote}
 
 \item Select the number in a vector that is the greatest distance from the first element of the vector
   \begin{quote}
@@ -489,24 +532,6 @@ mode_vec <- function(vec){
   counts <- as.data.frame(table(vec))$Freq
   vec[which(counts == max(counts))]
 }
-    \end{verbatim}
-  \end{quote}
-
-\item Index a series of observations by the first observation (hint: express each observation as a percentage of the first observation).
-  \begin{quote}
-    \begin{verbatim}
-how_to_index <- function(vec){
-  vec / vec[1] * 100
-}     
-    \end{verbatim}
-  \end{quote}
-
-\item Find the determinant of a four by four matrix.
-  \begin{quote}
-    \begin{verbatim}
-determinant <- function(matrix){
-  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
-}    
     \end{verbatim}
   \end{quote}
 
@@ -543,18 +568,6 @@ ptile <- function(vec){
     \end{verbatim}
   \end{quote}
 
-\item Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv"
-  \begin{quote}
-    \begin{verbatim}
-save_file <- function(df){
-  filename <- paste(substitute(df), "csv", sep = ".")
-
-  # best method to avoid adding row numbers
-  write.table(file, filename, sep = ",", row = F)
-}
-
-    \end{verbatim}
-  \end{quote}
 
 \item Return a vector with its elements reordered in a random manner.
   \begin{quote}
