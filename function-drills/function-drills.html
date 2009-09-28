@@ -1,0 +1,643 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css"> 
+  
+  <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $("#nav").css("position", "absolute");
+  });
+  $(window).scroll(function() {
+      $("#nav").animate({top: $(window).scrollTop() + "px"}, {queue: false});
+  });
+  </script>
+
+  <style>
+  #bd {font-size: 116%;}
+  code.bad {color: red;}
+
+  #yui-main h2 {
+    margin-top: 2em;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  h3 {font-size: 1em; margin-bottom: 0.25em; margin-top: 1.5em;}
+
+  .example {
+    background-color: #eee; 
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+    font-size: 93%;
+  }
+  dl {margin-left: 1em;}
+  dl dd {margin-left: 0; margin-bottom: 0.5em;}
+  dl dt {margin-top: 1em;}
+  
+  #nav ul {margin-left: 0;}
+  #nav ul li {list-style: none; margin-bottom: 0.5em;}
+  
+  </style>
+  
+  <title>R function drills</title>
+  
+</head>
+
+<body>
+  
+<div id="doc" class="yui-t5">
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b"><div class="yui-g">
+
+
+<h1>R function drills</h1>
+
+<ol>
+  <li> Return the circumference of a circle with the given radius.</li>
+     <pre class="answer">
+       <code>
+c_circ &lt;- function(r){
+  2 * pi * r
+}    
+       </code>
+     </pre>
+
+  <li> Return the area of a circle with the given radius.</li>
+     <pre class="answer">
+       <code>
+c_area &lt;- function(r){
+  pi * r ^ 2
+}
+       </code>
+     </pre>
+  
+    <li> Return the area of a circle with the given radius.</li>
+     <pre class="answer">
+       <code>
+c_vol &lt;- function(r){
+  4 / 3 * pi * r ^ 3
+}	    
+       </code>
+     </pre>
+  
+  <li> Return the circumference, area (of the largest cross-section), and volume of a sphere with the given radius. Each should be labelled in the functions output.</li>
+     <pre class="answer">
+       <code>
+c_stats &lt;- function(r){
+  c(circumference = c_circ(r),
+    area = c_area(r),
+    volume = c_vol(r)
+  )
+}    
+       </code>
+     </pre>
+
+  <li> Given the coefficients of a quadratic polynomial, return the roots.</li>
+     <pre class="answer">
+       <code>
+quad_formula &lt;- function(a, b, c){
+  stopifnot(b ^ 2 >= 4 * a * c)
+  c((-b - sqrt(b ^ 2 - 4 * a * c)) / (2 * a),
+    (-b + sqrt(b ^ 2 - 4 * a * c)) / (2 * a))
+}    
+       </code>
+     </pre>
+
+  <li> Return the lowest positive value of a vector</li>
+     <pre class="answer">
+       <code>
+min_pos &lt;- function(vec){
+  pos &lt;- vec[vec > 0]
+  min(pos)
+}    
+       </code>
+     </pre>
+
+  <li> Return the second lowest positive value of a vector</li>
+     <pre class="answer">
+       <code>
+min2_pos &lt;- function(vec){
+  pos &lt;- vec[vec > 0]
+  pos &lt;- pos[-which(pos == min(pos))]
+  min(pos)
+}
+       </code>
+     </pre>
+
+
+  <li> Divide each element in a numeric vector by the vector's length.</li>
+     <pre class="answer">
+       <code>
+div_vec &lt;- function(vec){
+  vec / length(vec)
+}
+       </code>
+     </pre>
+
+
+  <li> Test whether a number is even.</li>
+     <pre class="answer">
+       <code>
+is.even &lt;- function(num){
+  num %% 2 == 0
+}
+
+       </code>
+     </pre>
+  
+  <li> Test whether a number is odd.</li>
+     <pre class="answer">
+       <code>
+is.odd &lt;- function(num){
+  num %% 2 == 1
+}
+       </code>
+     </pre>
+
+  <li> If a number is odd add one to it.</li>
+     <pre class="answer">
+       <code>
+one_to_odd &lt;- function(num){
+  if (is.odd(num))
+    return(num + 1)
+  return(num)
+} 
+       </code>
+     </pre>
+
+  <li> If any number in a numeric vector is odd, add one to it.</li>
+     <pre class="answer">
+       <code>
+one_to_odd2 &lt;- function(vec){
+  vec[is.odd(vec)] &lt;- vec[is.odd(vec)] + 1
+  vec
+}	
+
+# note: this function is better than the previous one
+# It works for numbers AND vectors, and it is simpler
+       </code>
+     </pre>
+
+  <li> Test whether a number is an integer.</li>
+     <pre class="answer">
+       <code>
+integer &lt;- function(a){
+  trunc(a) == a
+}
+       </code>
+     </pre>
+
+
+  <li> Find the range of a vector.</li>
+     <pre class="answer">
+       <code>
+my_range &lt;- function(vec){
+  max(vec) - min(vec)
+}
+       </code>
+     </pre>
+
+  <li> Find the sum of a numeric vector (without using <code>sum()</code>).</li>
+     <pre class="answer">
+        <code>
+	my_sum &lt;- function(vec){
+	  total &lt;- 0
+	  for (i in 1:length(vec)){
+	  	total &lt;- total + vec[i]
+	  }
+	  total
+	}
+       </code>
+     </pre>
+
+  <li> Find the mean of a numeric vector (without using <code>mean()</code>).</li>
+     <pre class="answer">
+       <code>
+my_mean &lt;- function(vec){
+  my_sum(vec)/length(vec)
+}
+       </code>
+     </pre>
+  
+  <li> Find the mean of a vector that contains one or more NA's by ignoring any NA's (without using <code>mean()</code>).</li>
+     <pre class="answer">
+       <code>
+my_mean2 &lt;- function(vec){
+  my_mean(na.omit(vec))
+}
+
+       </code>
+     </pre>
+
+  <li> Find the variance of a numeric vector (without using <code>var()</code>).</li>
+     <pre class="answer">
+       <code>
+my_var &lt;- function(vec){
+  xbar &lt;- my_mean(vec)
+  n &lt;- length(vec)
+  sum &lt;- 0
+  
+  for (i in 1:n){
+  	sum &lt;- sum + (vec[i] - xbar) ^ 2
+  }
+  
+  # let's use n-1 so we can compare with R's var(). 
+  # This is the sample variance
+  sum / (n - 1)
+ }	
+
+       </code>
+     </pre>
+
+
+
+  <li> Automatically create a histogram of a vector.</li>
+     <pre class="answer">
+       <code>
+my_hist &lt;- function(vec){
+  hist(vec)
+}
+       </code>
+     </pre>
+
+  <li> Automatically create a histogram of a vector with the given number of bins.</li>
+     <pre class="answer">
+       <code>
+better_hist &lt;- function(vec, n){
+  hist(vec, breaks = n)
+}
+       </code>
+     </pre>
+  
+  <li> Automatically create a scatterplot matrix with the variables in a given data frame.</li>
+     <pre class="answer">
+       <code>
+scatterplot &lt;- function(df){
+  library(ggplot2)
+  plotmatrix(df)
+}
+       </code>
+     </pre>
+  
+
+  <li> Find the least common multiple of two numbers.</li>
+     <pre class="answer">
+       <code>
+LCM &lt;- function(a,b){
+  test &lt;- a * c(1:b)
+  multiples &lt;- test[integer(test/b)] 
+  min(multiples)
+} 
+       </code>
+     </pre>
+
+  <li> Index a series of observations by the first observation (hint: express each observation as a percentage of the first observation).</li>
+     <pre class="answer">
+       <code>
+how_to_index &lt;- function(vec){
+  vec / vec[1] * 100
+}     
+       </code>
+     </pre>
+
+  <li> Find the determinant of a four by four matrix.</li>
+     <pre class="answer">
+       <code>
+determinant &lt;- function(matrix){
+  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
+}    
+       </code>
+     </pre>
+
+
+  
+  <li> Separate the integer and decimal parts of a number, return them in a vector of length two.</li>
+     <pre class="answer">
+       <code>
+split_num &lt;- function(num){
+  c(trunc(num), num - trunc(num))
+}
+       </code>
+     </pre>
+
+  <li> Return the given vector with all NA's removed.</li>
+     <pre class="answer">
+       <code>
+clean &lt;- function(vec){
+  na.omit(vec)
+}
+       </code>
+     </pre>
+
+
+
+  <li> Return the row numbers of rows in a data frame that contain NA's.</li>
+     <pre class="answer">
+       <code>
+get_NAs &lt;- function(df){
+  new &lt;- na.omit(df)
+  setdiff(row.names(df), row.names(new))
+}
+       </code>
+     </pre>
+  
+  <li> Return the actual rows of a data frame that contain NA's.</li>
+     <pre class="answer">
+       <code>
+get_NAs2 &lt;- function(df){
+  new &lt;- na.omit(df)
+  rows &lt;- setdiff(row.names(df), row.names(new))
+  df[rows,]
+}
+       </code>
+     </pre>
+  
+
+  <li> Create a new vector by repeating a given vector a given number of times.</li>
+     <pre class="answer">
+       <code>
+rep_vec &lt;- function(vec, n){
+  rep(vec, n)	
+}
+       </code>
+     </pre>
+
+  <li> Double each element in a vector (e.g., turn \emph{a,b,c,...} into \emph{a, a, b, b, c,...}).</li>
+     <pre class="answer">
+       <code>
+rep_vec2 &lt;- function(vec, n){
+  vec[rep(1:length(vec), each = n)]
+}
+       </code>
+     </pre>
+
+
+  <li> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with equal probability of returning each.</li>
+     <pre class="answer">
+       <code>
+random &lt;- function(){
+  sample(c("Ace", "King", "Queen"), 1)
+}
+       </code>
+     </pre>
+
+  <li> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with twice as much probability of returning ``Ace" as either ``King" or ``Queen."</li>
+     <pre class="answer">
+       <code>
+ random2 &lt;- function(){
+  sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
+}
+       </code>
+     </pre>
+
+  <li> Take any character string and add ``...in Stat 405" to the end.</li>
+     <pre class="answer">
+       <code>
+fortune_cookie &lt;- function(fortune){
+  paste(fortune, "...in Stat405.")
+}
+       </code>
+     </pre>
+
+  <li> Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</li>
+     <pre class="answer">
+       <code>
+fortune_cookie &lt;- function(fortune){
+  stopifnot(is.character(fortune))
+  paste(fortune, "...in Stat405.")
+}	
+       </code>
+     </pre>
+
+
+  <li> Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.</li>
+     <pre class="answer">
+       <code>
+save_plot &lt;- function(name){
+  filename &lt;- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = 6, height = 6)
+}    
+       </code>
+     </pre>
+
+  <li> Save the current graph with a given width and height as a pdf with the inputted name.</li>
+     <pre class="answer">
+       <code>
+save_plot2 &lt;- function(name, width, height){
+  filename &lt;- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = width, height = height)
+}    
+       </code>
+     </pre>
+  
+  <li> Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv".</li>
+     <pre class="answer">
+       <code>
+save_file &lt;- function(df){
+  filename &lt;- paste(substitute(df), "csv", sep = ".")
+
+  # best method to avoid adding row numbers
+  write.table(file, filename, sep = ",", row = F)
+}
+
+       </code>
+     </pre>
+
+  <li> Identify whether an object is a logical, character, or numeric object.</li>
+     <pre class="answer">
+       <code>
+type &lt;- function(obj){
+  mode(obj)
+}
+       </code>
+     </pre>
+  
+  <li> Display the number of groups of size n can be made from the inputted vector of length k.</li>
+     <pre class="answer">
+       <code>
+n_choose_k &lt;- function(n, k){
+  factorial(n) / (factorial(k) * factorial(n - k))
+}
+    
+       </code>
+     </pre>
+
+  <li> Return the number of unique permutations that can be from a given vector (caution: don't use large vectors).</li>
+     <pre class="answer">
+       <code>
+num_seqs &lt;- function(vec){
+  n &lt;- length(vec)
+  factorial(n)
+}    
+       </code>
+     </pre>
+
+  <li> Return the number of unique sets that can be made from an inputted vector.</li>
+     <pre class="answer">
+       <code>
+num_sets &lt;- function(vec){
+  vec &lt;- unique(vec)
+  n &lt;- length(vec)
+  my_sum(2 ^ c(0:(n-1)))
+}
+       </code>
+     </pre>
+
+  <li> Return whichever the entered number is closest to: 0 or 1000.</li>
+     <pre class="answer">
+       <code>
+closest &lt;- function(a){
+  if (a > 1000){
+  	a &lt;- 1000
+  }
+  
+  round(a, -3)
+}
+       </code>
+     </pre>
+
+  <li> Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.</li>
+     <pre class="answer">
+       <code>
+combos &lt;- function(df){
+  combinations &lt;- table(df[,1], df[,2])
+  df_counts &lt;- as.data.frame(combinations)
+  names(df_counts) &lt;- c(names(df), "count")
+  df_counts &lt;- subset(df_counts, count > 0)
+  df_counts
+}    
+       </code>
+     </pre>
+
+  <li> Automatically plot the above results with each variable on an axis and the number of occurrences (counts) represented by color.</li>
+     <pre class="answer">
+       <code>
+colorful_counts &lt;- function(df){
+  df_counts &lt;- combos(df)
+  df_counts &lt;- within(df_counts, {
+    x &lt;- as.numeric(as.character(df_counts[,1]))
+    y &lt;- as.numeric(as.character(df_counts[,1]))
+  })
+  qplot(x, y, data = df_counts, colour = count)
+}     
+       </code>
+     </pre>
+
+  <li> Create a new vector where each \emph{ith} element is the sum of the first \emph{i} elements of the given vector.</li>
+     <pre class="answer">
+       <code>
+cumsum &lt;- function(vec){
+  new &lt;- vector(length = length(vec))
+  for(i in 1:length(vec)){
+  	new[i] &lt;- my_sum(vec[1:i])
+  }
+  new
+}
+       </code>
+     </pre>
+
+
+  <li> Select the number in a vector that is the greatest distance from the first element of the vector</li>
+     <pre class="answer">
+       <code>
+select &lt;- function(vec){
+  distance &lt;- abs(vec - vec[1])
+  vec[which(distance == max(distance))]
+}
+       </code>
+     </pre>
+
+  <li> Return whether a vector of numbers is right skewed or left skewed by comparing its mean and median.</li>
+     <pre class="answer">
+       <code>
+# note: this concept only works for large amounts of skew - Garrett
+skew &lt;- function(vec){
+  if (mean(vec) < median(vec))
+    return("left-skewed")
+  if (mean(vec) > median(vec))
+    return("right-skewed")
+  return("symmetric")
+}
+       </code>
+     </pre>
+
+  <li> Find the (statistical) mode of a vector.</li>
+     <pre class="answer">
+       <code>
+mode_vec &lt;- function(vec){
+  counts &lt;- as.data.frame(table(vec))$Freq
+  vec[which(counts == max(counts))]
+}
+       </code>
+     </pre>
+
+  <li> Given a numeric vector of length 100, determine which element occurs at the 70th percentile.</li>
+     <pre class="answer">
+       <code>
+ptile100 &lt;- function(vec){
+  vec[order(vec)]
+  vec[70]
+}
+
+       </code>
+     </pre>
+
+  <li> Given a numeric vector of length 10, determine which element occurs at the 70th percentile.</li>
+     <pre class="answer">
+       <code>
+ptile10 &lt;- function(vec){
+  vec[order(vec)]
+  vec[7]
+}
+
+       </code>
+     </pre>
+
+  <li> Given a numeric vector of length 10, determine which element occurs at the 70th percentile.</li>
+     <pre class="answer">
+       <code>
+ptile &lt;- function(vec){
+  vec[order(vec)]
+  vec[round(.7 * length(vec), 1)]
+}
+
+       </code>
+     </pre>
+
+
+  <li> Return a vector with its elements reordered in a random manner.</li>
+     <pre class="answer">
+       <code>
+shuffle &lt;- function(vec){
+  sample(vec, length(vec), replace = F) 
+}
+       </code>
+     </pre>
+
+  <li> Return a vector with its elements ordered from smallest to largest.</li>
+     <pre class="answer">
+       <code>
+order1 &lt;- function(vec){
+  vec[order(vec)]
+}
+       </code>
+     </pre>
+
+  <li> Return a vector with its elements ordered largest to smallest.</li>
+     <pre class="answer">
+       <code>
+order2 &lt;- function(vec){
+  vec[order(-vec)]
+}
+       </code>
+     </pre>
+
+  
+  
+   
+</ol>
+
+
+</body>
+</html>
