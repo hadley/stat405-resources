@@ -59,7 +59,7 @@
   <li>Use <code>summarise()</code> to make a new data set that has the average depth and price of the diamonds in the data set. </li>
      <pre class="answer">
        <code>
-new <- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
+new &lt;- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
        </code>
      </pre>
   
@@ -67,21 +67,21 @@ new <- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
   <li>Use <code>transform()</code> to add a new column to the data set that records each diamond's price per carat.</li>
      <pre class="answer">
        <code>
-new <- transform(diamonds, carat_price = price / carat)
+new &lt;- transform(diamonds, carat_price = price / carat)
        </code>
      </pre>  
      
   <li>Use <code>subset()</code> to make a data set that only includes diamonds with an Ideal cut. </li>
      <pre class="answer">
        <code>
-new <- subset(diamonds, cut == "Ideal")
+new &lt;- subset(diamonds, cut == "Ideal")
        </code>
      </pre>  
 
   <li>Use <code>ddply()</code> to create a new data set that groups diamonds by their cut and displays the average price of each group.</li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "cut", summarise, avg_price = mean(price))
+new &lt;- ddply(diamonds, "cut", summarise, avg_price = mean(price))
        </code>
      </pre>  
 
@@ -89,7 +89,7 @@ new <- ddply(diamonds, "cut", summarise, avg_price = mean(price))
   <li>Create a new data set that groups diamonds by color and displays the average depth and average table for each group. </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "color", summarise, avg_depth = mean(depth), avg_table = mean(table))
+new &lt;- ddply(diamonds, "color", summarise, avg_depth = mean(depth), avg_table = mean(table))
        </code>
      </pre>  
 
@@ -97,21 +97,21 @@ new <- ddply(diamonds, "color", summarise, avg_depth = mean(depth), avg_table = 
   <li>Add two columns to the diamonds data set. The first column should display the average depth of diamonds in the diamond's color group. The second column should display the average table of diamonds in the diamonds color group.</li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "color", transform, avg_depth = mean(depth), avg_table = mean(table))
+new &lt;- ddply(diamonds, "color", transform, avg_depth = mean(depth), avg_table = mean(table))
        </code>
      </pre>  
 
   <li>Make a data set that contains all of the unique combinations of cut, color, and clarity, as well the average price of diamonds in each group. </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, c("cut", "color", "clarity"), summarize, avg_price = mean(price))
+new &lt;- ddply(diamonds, c("cut", "color", "clarity"), summarize, avg_price = mean(price))
        </code>
      </pre>  
      
   <li>Add a column to the diamonds data set that displays the average price for all diamonds with a diamond's cut, color, and clarity. </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, c("cut", "color", "clarity"), transform, avg_price = mean(price))
+new &lt;- ddply(diamonds, c("cut", "color", "clarity"), transform, avg_price = mean(price))
        </code>
      </pre>  
 
@@ -119,7 +119,7 @@ new <- ddply(diamonds, c("cut", "color", "clarity"), transform, avg_price = mean
   <li>Do diamonds with the best cut fetch the best price for a given amount of carats? (Hint: Determine the average price per carat for diamonds in each cut group.) </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "cut", summarise, carat_price = mean(price / carat))
+new &lt;- ddply(diamonds, "cut", summarise, carat_price = mean(price / carat))
 
 # no
        </code>
@@ -128,7 +128,7 @@ new <- ddply(diamonds, "cut", summarise, carat_price = mean(price / carat))
   <li>Which color diamonds seem to be largest on average (in terms of carats)? </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "color", summarise, avg_carat = mean(carat))
+new &lt;- ddply(diamonds, "color", summarise, avg_carat = mean(carat))
 
 # diamonds with color J (the worst color)
        </code>
@@ -150,7 +150,7 @@ table(subset(diamonds, cut = "Ideal")$color)
   <li>Which clarity of diamonds has the largest average table per carats? </li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "clarity", summarise, rel_table = mean(table / carat))
+new &lt;- ddply(diamonds, "clarity", summarise, rel_table = mean(table / carat))
 
 # clarity = VVS1
        </code>
@@ -159,7 +159,7 @@ new <- ddply(diamonds, "clarity", summarise, rel_table = mean(table / carat))
   <li> Which diamond has the largest price per carat compared other diamonds with its cut, color, and clarity?</li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, c("cut", "color", "clarity"), transform, diff = price - mean(price))
+new &lt;- ddply(diamonds, c("cut", "color", "clarity"), transform, diff = price - mean(price))
 
 which(new$diff == max(new$diff))
 
@@ -170,7 +170,7 @@ which(new$diff == max(new$diff))
   <li>What is the average price per carat of diamonds that cost more than $10000? </li>
      <pre class="answer">
        <code>
-not_cheap <- subset(diamonds, price &gt; 10000)
+not_cheap &lt;- subset(diamonds, price &gt; 10000)
 summarise(not_cheap, carat_price = mean(price / carat))
 
 # $8,044.44 per carat 
@@ -180,7 +180,7 @@ summarise(not_cheap, carat_price = mean(price / carat))
   <li>Display the largest diamond depth observed for each clarity group.</li>
      <pre class="answer">
        <code>
-new <- ddply(diamonds, "clarity", summarise, max_depth = max(depth))
+new &lt;- ddply(diamonds, "clarity", summarise, max_depth = max(depth))
        </code>
      </pre>  
 
