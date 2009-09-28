@@ -3,14 +3,18 @@
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css"> 
   
-  <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function() {
-      $("#nav").css("position", "absolute");
+      $("pre.answer").
+        css("display", "none").
+        after("<p><a class='show' href='#'>show answer</a></p>");
+      $("a.show").click(function() {
+        $(this).parent().prev().slideDown();
+        $(this).parent().remove();
+      })
   });
-  $(window).scroll(function() {
-      $("#nav").animate({top: $(window).scrollTop() + "px"}, {queue: false});
-  });
+  
   </script>
 
   <style>
@@ -54,14 +58,11 @@
 <h1>R function drills</h1>
 
 <ol>
-  <li> Return the circumference of a circle with the given radius.</li>
+  <li><p>Return the circumference of a circle with the given radius.</p></li>
      <pre class="answer">
-       <code>
 c_circ &lt;- function(r){
   2 * pi * r
-}    
-       </code>
-     </pre>
+}</pre>
 
   <li> Return the area of a circle with the given radius.</li>
      <pre class="answer">
@@ -89,7 +90,7 @@ c_stats &lt;- function(r){
     area = c_area(r),
     volume = c_vol(r)
   )
-}    
+}
        </code>
      </pre>
 
