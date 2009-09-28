@@ -1,0 +1,192 @@
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css"> 
+  
+  <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function() {
+      $("#nav").css("position", "absolute");
+  });
+  $(window).scroll(function() {
+      $("#nav").animate({top: $(window).scrollTop() + "px"}, {queue: false});
+  });
+  </script>
+
+  <style>
+  #bd {font-size: 116%;}
+  code.bad {color: red;}
+
+  #yui-main h2 {
+    margin-top: 2em;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  h3 {font-size: 1em; margin-bottom: 0.25em; margin-top: 1.5em;}
+
+  .example {
+    background-color: #eee; 
+    border: 1px solid #ccc;
+    margin-bottom: 1em;
+    font-size: 93%;
+  }
+  dl {margin-left: 1em;}
+  dl dd {margin-left: 0; margin-bottom: 0.5em;}
+  dl dt {margin-top: 1em;}
+  
+  #nav ul {margin-left: 0;}
+  #nav ul li {list-style: none; margin-bottom: 0.5em;}
+  
+  </style>
+  
+  <title>plyr function drills</title>
+  
+</head>
+
+<body>
+  
+<div id="doc" class="yui-t5">
+<div id="bd">
+<div id="yui-main">
+<div class="yui-b"><div class="yui-g">
+
+<h1>plyr function drills</h1>
+
+<h2>Diamonds data set</h2>
+
+<ol>
+  <li>Use <code>summarise()</code> to make a new data set that has the average depth and price of the diamonds in the data set. </li>
+     <pre class="answer">
+       <code>
+new <- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
+       </code>
+     </pre>
+  
+  
+  <li>Use <code>transform()</code> to add a new column to the data set that records each diamond's price per carat.</li>
+     <pre class="answer">
+       <code>
+new <- transform(diamonds, carat_price = price / carat)
+       </code>
+     </pre>  
+     
+  <li>Use <code>subset()</code> to make a data set that only includes diamonds with an Ideal cut. </li>
+     <pre class="answer">
+       <code>
+new <- subset(diamonds, cut == "Ideal")
+       </code>
+     </pre>  
+
+  <li>Use <code>ddply()</code> to create a new data set that groups diamonds by their cut and displays the average price of each group.</li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "cut", summarise, avg_price = mean(price))
+       </code>
+     </pre>  
+
+
+  <li>Create a new data set that groups diamonds by color and displays the average depth and average table for each group. </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "color", summarise, avg_depth = mean(depth), avg_table = mean(table))
+       </code>
+     </pre>  
+
+
+  <li>Add two columns to the diamonds data set. The first column should display the average depth of diamonds in the diamond's color group. The second column should display the average table of diamonds in the diamonds color group.</li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "color", transform, avg_depth = mean(depth), avg_table = mean(table))
+       </code>
+     </pre>  
+
+  <li>Make a data set that contains all of the unique combinations of cut, color, and clarity, as well the average price of diamonds in each group. </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, c("cut", "color", "clarity"), summarize, avg_price = mean(price))
+       </code>
+     </pre>  
+     
+  <li>Add a column to the diamonds data set that displays the average price for all diamonds with a diamond's cut, color, and clarity. </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, c("cut", "color", "clarity"), transform, avg_price = mean(price))
+       </code>
+     </pre>  
+
+
+  <li>Do diamonds with the best cut fetch the best price for a given amount of carats? (Hint: Determine the average price per carat for diamonds in each cut group.) </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "cut", summarise, carat_price = mean(price / carat))
+
+# no
+       </code>
+     </pre>  
+
+  <li>Which color diamonds seem to be largest on average (in terms of carats)? </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "color", summarise, avg_carat = mean(carat))
+
+# diamonds with color J (the worst color)
+       </code>
+     </pre>  
+
+  <li>What color of diamonds occurs the most frequently among diamonds with ideal cuts? </li>
+     <pre class="answer">
+       <code>
+ddply(subset(diamonds, cut = "Ideal"), "color", summarise, freq = length(color))
+
+# or
+
+table(subset(diamonds, cut = "Ideal")$color)
+
+# color G
+       </code>
+     </pre>  
+
+  <li>Which clarity of diamonds has the largest average table per carats? </li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "clarity", summarise, rel_table = mean(table / carat))
+
+# clarity = VVS1
+       </code>
+     </pre>  
+
+  <li> Which diamond has the largest price per carat compared other diamonds with its cut, color, and clarity?</li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, c("cut", "color", "clarity"), transform, diff = price - mean(price))
+
+which(new$diff == max(new$diff))
+
+# Diamond 47423 (the diamond in row 47423)
+       </code>
+     </pre>  
+
+  <li>What is the average price per carat of diamonds that cost more than $10000? </li>
+     <pre class="answer">
+       <code>
+not_cheap <- subset(diamonds, price &gt; 10000)
+summarise(not_cheap, carat_price = mean(price / carat))
+
+# $8,044.44 per carat 
+       </code>
+     </pre>  
+
+  <li>Display the largest diamond depth observed for each clarity group.</li>
+     <pre class="answer">
+       <code>
+new <- ddply(diamonds, "clarity", summarise, max_depth = max(depth))
+       </code>
+     </pre>  
+
+
+</ol>
+
+
+</body>
+</html>
