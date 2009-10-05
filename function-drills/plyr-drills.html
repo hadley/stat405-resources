@@ -52,11 +52,12 @@
 <div class="yui-b"><div class="yui-g">
 
 <h1>plyr function drills</h1>
+<h1>by Garrett Grolemund</h1>
 
 <h2>Diamonds data set</h2>
 
 <ol>
-  <li>Use <code>summarise()</code> to make a new data set that has the average depth and price of the diamonds in the data set. </li>
+  <li>Make a new data set that has the average depth and price of the diamonds in the data set. <p class="hint">Use <code>summarise()</code></p></li>
      <pre class="answer">
        <code>
 new &lt;- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
@@ -64,21 +65,21 @@ new &lt;- summarise(diamonds, avg_depth = mean(depth), avg_price = mean(depth))
      </pre>
   
   
-  <li>Use <code>transform()</code> to add a new column to the data set that records each diamond's price per carat.</li>
+  <li>Add a new column to the data set that records each diamond's price per carat.<p class="hint">Use <code>transform()</code></p></li>
      <pre class="answer">
        <code>
 new &lt;- transform(diamonds, carat_price = price / carat)
        </code>
      </pre>  
      
-  <li>Use <code>subset()</code> to make a data set that only includes diamonds with an Ideal cut. </li>
+  <li>Make a data set that only includes diamonds with an Ideal cut. <p class="hint">Use <code>subset()</code></p></li>
      <pre class="answer">
        <code>
 new &lt;- subset(diamonds, cut == "Ideal")
        </code>
      </pre>  
 
-  <li>Use <code>ddply()</code> to create a new data set that groups diamonds by their cut and displays the average price of each group.</li>
+  <li>Create a new data set that groups diamonds by their cut and displays the average price of each group.<p class="hint">Use <code>ddply()</code></p></li>
      <pre class="answer">
        <code>
 new &lt;- ddply(diamonds, "cut", summarise, avg_price = mean(price))
@@ -116,7 +117,7 @@ new &lt;- ddply(diamonds, c("cut", "color", "clarity"), transform, avg_price = m
      </pre>  
 
 
-  <li>Do diamonds with the best cut fetch the best price for a given amount of carats? (Hint: Determine the average price per carat for diamonds in each cut group.) </li>
+  <li>Do diamonds with the best cut fetch the best price for a given amount of carats? <p class="hint"> Determine the average price per carat for diamonds in each cut group.</p> </li>
      <pre class="answer">
        <code>
 new &lt;- ddply(diamonds, "cut", summarise, carat_price = mean(price / carat))
@@ -187,6 +188,296 @@ new &lt;- ddply(diamonds, "clarity", summarise, max_depth = max(depth))
 
 </ol>
 
+
+
+
+
+
+
+
+<h2>Players data set</h2>
+
+<ol>
+  <li>Create a new dataframe that only includes players less than 60 inches tall. </li>
+     <pre class="answer">
+       <code>
+new &lt;- subset(players, height < 60)
+       </code>
+     </pre>  
+     
+  <li>What percentage of players bat left handed? Right handed? Both?<p class="hint">Use <code>table()</code></p></li>
+     <pre class="answer">
+       <code>
+table(players$bats) / nrow(players) * 100
+
+#or 
+
+summarise(players, table(bats) / nrow(players) * 100)
+       </code>
+     </pre>
+  
+  
+
+     
+  <li>Make a dataframe that displays just the average height of players from each country.</li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, "country", summarise, avg_height = mean(height))
+       </code>
+     </pre>  
+
+  <li>Create a new data set that displays the ratio of right handed batters to all batters for each country.
+</li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, "country", summarise, ratio = sum(bats == "R") / length(bats))
+       </code>
+     </pre>  
+
+
+  <li>Create a dataframe that compares the average body mass index (BMI) of players from each state, nation combination. (BMI = weight * 703) / height<sup>2</sup> </li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, c("state", "country"), summarise, bmi = (mean(weight, na.rm = T) * 703) / mean(height, na.rm = T) ^ 2)
+       </code>
+     </pre>  
+
+
+  <li>For each player, display the average height of all players with his weight. Put this new variable in a new column. </li>
+     <pre class="answer">
+       <code>
+heights &lt;- ddply(players, "weight", transform, avg_height = mean(height, na.rm = T))
+       </code>
+     </pre>  
+
+  <li>Make a dataframe that displays just the average weight of players from each state. <pre class="hint">Don't be surprised to see numbers in the states column. The players data set records some states as numbers.</pre></li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, "state", summarise, avg_weight = mean(weight))
+       </code>
+     </pre>  
+     
+  <li>Add a column to the players data set that displays the average weight for all players from the player's state who throw with the same hand as the player. </li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, c("state", "throws"), transform, avg_weight = mean(weight, na.rm = T))
+       </code>
+     </pre>  
+
+
+  <li>Make a data set that just includes players with nicknames.  </li>
+     <pre class="answer">
+       <code>
+named &lt;- subset(players, nickname != "")
+
+       </code>
+     </pre>  
+
+  <li>Do players with nicknames weigh more on average than players without nicknames? <pre class="hint"> Save time: use the data set made above.</pre> <pre class="hint"> Avoid NA's by using <code>mean(weight, na.rm = T)<code></pre></li>
+     <pre class="answer">
+       <code>
+mean(named$weight, na.rm = T)
+summarise(players[players$nickname == "",], mean(weight, na.rm = T))
+
+# no
+       </code>
+     </pre>  
+
+  <li>Which country has the fattest players (on average)? <pre class="hint">Measure fatness by the body mass index.</pre></li><pre class="hint">Use <code>order()</code> and subsetting to weight entries by weight. For example, <code>players[order(-players$weight),]</code></pre></li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, "country", summarise, avg_weight = mean(weight, na.rm = T))
+new[order(-new$avg_weight),]
+
+# Indonesia
+       </code>
+     </pre>  
+
+  <li>From which states have the most baseball players come from? </li>
+     <pre class="answer">
+       <code>
+       
+new &lt;- ddply(players, "state", summarise, number = length(state))
+new[order(-new$number),]
+
+# California, out of the country, Texas, etc.
+       </code>
+     </pre>  
+
+  <li> Do more American (USA) players or foreign players have a nicknames? <pre class="hint"> Use the results of question 9.</pre></li>
+     <pre class="answer">
+       <code>
+nrow(subset(named, country == "USA"))
+nrow(subset(named, country != "USA"))
+
+# American players
+       </code>
+     </pre>  
+
+  <li>Which player is the tallest when compared to the average height of players with his weight? <pre class="hint"> Use the results of question 6.</pre></li>
+     <pre class="answer">
+       <code>
+new &lt;- transform(heights, diff = height - avg_height) 
+subset(new, diff == max(diff, na.rm = T)) 
+
+# Dave Pavlos 
+       </code>
+     </pre>  
+
+  <li>Which are taller on average: players who throw with their right hand, or players who throw with their left?</li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(players, "throws", summarise, avg_height = mean(height, na.rm = T))
+
+# Left
+       </code>
+     </pre>  
+
+
+</ol>
+
+
+
+<h2>Baby names data set</h2>
+
+<ol>
+  <li>Create a new dataframe that only includes years since 2000. </li>
+     <pre class="answer">
+       <code>
+newest &lt;- subset(names, year >= 2000)
+       </code>
+     </pre>  
+     
+  <li>What name has been used for the most number of years (when used for a single gender)?</li>
+     <pre class="answer">
+       <code>
+years &lt;- ddply(names, c("name", "sex"), summarise, year = length(name))
+subset(years, year == max(year))
+
+#It is a 329 way tie 
+       </code>
+     </pre>
+  
+  
+
+     
+  <li>What names have only been used one year?<pre class="hint">Use the result above.</pre></li>
+     <pre class="answer">
+       <code>
+subset(years, year == 1)
+
+# There are 876 of them
+       </code>
+     </pre>  
+     
+  <li>Create a new column that displays the number of genders the name was used for each year. Note: not recommended for slower computers.</li>
+     <pre class="answer">
+       <code>
+
+boygirl &lt;- ddply(names, c("year", "name"), transform, both = length(year))
+
+# or
+
+years2 &lt;- ddply(names, "name", summarise, year2 = length(name))
+temp &lt;- merge(years, years2, by = "name") #years from question 2
+boths &lt;- subset(temp, year != year2)
+boths &lt;- unique(boths$name)
+
+       </code>
+     </pre>  
+  <li>Make a data set of names that have been both boy and girl names.<pre class="hint">Use the results from above.</pre><pre class="hint"><code>unique()</code> removes identical rows in a dataframe. Apply this to your results to get a concise list.</pre>
+
+</li>
+     <pre class="answer">
+       <code>
+new &lt;- subset(boygirl, both == 2)
+boths &lt;- unique(new[,2])
+       </code>
+     </pre>  
+
+
+
+
+
+  <li>For each year, display the total number of names that were used. Treat boy and girl versions of the same name as two separate names.</li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(names, "year", summarise, num_names = length(year))
+
+# 2000 names were recorded for each year
+       </code>
+     </pre>  
+
+  <li>Which name received the largest percentage of any name for any year (consider boy and girl names as distinct) </li>
+     <pre class="answer">
+       <code>
+subset(names, percent == max(percent))
+
+# John in 1880
+       </code>
+     </pre> 
+
+  <li>Which girl's name received the largest percentage of any girl's name for any year? </li>
+     <pre class="answer">
+       <code>
+girls &lt;- subset(names, sex == "girl")
+subset(girls, percent == max(percent))
+
+# Mary in 1880
+       </code>
+     </pre> 
+
+  <li>Display the average percentage each name received during all the years it was used. Treat girl and boy versions of the same name as different names. </li>
+     <pre class="answer">
+       <code>
+percent &lt;- ddply(names, c("name", "sex"), summarise, avg_per = mean(percent))
+
+       </code>
+     </pre>  
+
+  <li>Which name recorded in the data set has been out of use for the longest time? <pre class="hint"> You could consider the last year each name was recorded</pre></li>
+     <pre class="answer">
+       <code>
+last &lt;- ddply(names, c("name"), summarise, last_use = max(year))
+subset(last, last_use == min(last_use))
+
+# 43 names have been out of use since 1880
+       </code>
+     </pre>  
+
+  <li>In a new column, display the total number of years a name has been used (as either a boys name or a girls name).</li>
+     <pre class="answer">
+       <code>
+new &lt;- ddply(names, "name", transform, num_years = length(year))
+
+       </code>
+     </pre>  
+
+  <li>In general, are names that have been used for both boys and girls more popular for boys or girls? <pre class="hint"> Compare the average percentage a name receives when used as a boy to the average percentage when its used for a girl.</pre><pre class="hint"> Use the results from questions 5 and 9.</pre></li>
+     <pre class="answer">
+       <code>
+
+bg_names &lt;- subset(percent, name %in% both) 
+new &lt;- ddply(bg_names, "name", summarise, diff = avg_per[sex=="boy"] - avg_per[sex =="girl"])
+mean(new$diff $gt; 0)
+
+# More popular for girls (new$diff $gt; 0 is TRUE (i.e, 1) when the boys version is more popular. This occurred less than half the time (i.e. mean(new$diff $gt; 0) &lt; 0.5)
+       </code>
+     </pre>  
+
+
+  <li>What name has earned the most percentage points in a year for any name since 2000? <p class="hint"> Use the results of question 1.</p></li>
+     <pre class="answer">
+       <code> 
+subset(newest, percent == max(percent)) 
+
+# Jacob in 2000 
+       </code>
+     </pre>  
+
+
+
+</ol>
 
 </body>
 </html>
