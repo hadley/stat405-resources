@@ -171,14 +171,22 @@ new &lt;- ddply(players, c("state", "throws"), transform,
      <pre class="answer">
 named &lt;- subset(players, nickname != "")</pre></li>  
 
-  <li><p>Do players with nicknames weigh more on average than players without nicknames? <pre class="hint"> Save time: use the data set made above.</pre></li> <pre class="hint"> Avoid NA's by using <code>mean(weight, na.rm = T)<code></pre></li>
-     <pre class="answer">
+  <li>
+    <p>Do players with nicknames weigh more on average than players without nicknames?</p>
+    
+   <p class="hint"> Save time: use the data set made above.</p>
+   <p class="hint"> Avoid NA's by using <code>mean(weight, na.rm = T)</code>
+    <pre class="answer">
 mean(named$weight, na.rm = T)
 summarise(players[players$nickname == "",], mean(weight, na.rm = T))
 
 # no</pre></li>  
 
-  <li><p>Which country has the fattest players (on average)? <pre class="hint">Measure fatness by the body mass index.</pre></li><pre class="hint">Use <code>order()</code> and subsetting to weight entries by weight. For example, <code>players[order(-players$weight),]</code></pre></li>
+  <li>
+    <p>Which country has the fattest players (on average)?</p>
+    <p class="hint">Measure fatness by the body mass index.</p>
+    <p class="hint">Use <code>order()</code> and subsetting to sort entries by weight. For example, <code>players[order(-players$weight),]</code></p>
+    
      <pre class="answer">
 new &lt;- ddply(players, "country", summarise, avg_weight = mean(weight, na.rm = T))
 new[order(-new$avg_weight),]
@@ -192,14 +200,18 @@ new[order(-new$number),]
 
 # California, out of the country, Texas, etc.</pre></li>  
 
-  <li><p> Do more American (USA) players or foreign players have a nicknames? <pre class="hint"> Use the results of question 9.</pre></li>
+  <li>
+    <p> Do more American (USA) players or foreign players have a nicknames?</p> 
+  <p class="hint"> Use the results of question 9.</p>
      <pre class="answer">
 nrow(subset(named, country == "USA"))
 nrow(subset(named, country != "USA"))
 
 # American players</pre></li>  
 
-  <li><p>Which player is the tallest when compared to the average height of players with his weight? <pre class="hint"> Use the results of question 6.</pre></li>
+  <li>
+    <p>Which player is the tallest when compared to the average height of players with his weight?</p> 
+    <p class="hint"> Use the results of question 6.</p>
      <pre class="answer">
 new &lt;- transform(heights, diff = height - avg_height) 
 subset(new, diff == max(diff, na.rm = T)) 
@@ -234,7 +246,9 @@ subset(years, year == max(year))
   
 
      
-  <li><p>What names have only been used one year?<pre class="hint">Use the result above.</pre></li>
+  <li>
+    <p>What names have only been used one year?</p>
+    <p class="hint">Use the result above.</p>
      <pre class="answer">
 subset(years, year == 1)
 
@@ -250,7 +264,9 @@ years2 &lt;- ddply(names, "name", summarise, year2 = length(name))
 temp &lt;- merge(years, years2, by = "name") #years from question 2
 boths &lt;- subset(temp, year != year2)
 boths &lt;- unique(boths$name)</pre></li>  
-  <li><p>Make a data set of names that have been both boy and girl names.<pre class="hint">Use the results from above.</pre></li><pre class="hint"><code>unique()</code> removes identical rows in a dataframe. Apply this to your results to get a concise list.</pre></li>
+  <li><p>Make a data set of names that have been both boy and girl names.</p>
+    <p class="hint">Use the results from above.</p>
+    <p class="hint"><code>unique()</code> removes identical rows in a dataframe. Apply this to your results to get a concise list.</p>
 
 
      <pre class="answer">
@@ -280,7 +296,8 @@ subset(girls, percent == max(percent))
      <pre class="answer">
 percent &lt;- ddply(names, c("name", "sex"), summarise, avg_per = mean(percent))</pre></li>  
 
-  <li><p>Which name recorded in the data set has been out of use for the longest time? <pre class="hint"> You could consider the last year each name was recorded</pre></li>
+  <li><p>Which name recorded in the data set has been out of use for the longest time?</p>
+     <p class="hint"> You could consider the last year each name was recorded</p>
      <pre class="answer">
 last &lt;- ddply(names, c("name"), summarise, last_use = max(year))
 subset(last, last_use == min(last_use))
@@ -291,7 +308,9 @@ subset(last, last_use == min(last_use))
      <pre class="answer">
 new &lt;- ddply(names, "name", transform, num_years = length(year))</pre></li>  
 
-  <li><p>In general, are names that have been used for both boys and girls more popular for boys or girls? <pre class="hint"> Compare the average percentage a name receives when used as a boy to the average percentage when its used for a girl.</pre></li><pre class="hint"> Use the results from questions 5 and 9.</pre></li>
+  <li><p>In general, are names that have been used for both boys and girls more popular for boys or girls?</p>
+    <p class="hint"> Compare the average percentage a name receives when used as a boy to the average percentage when its used for a girl.</p>
+    <p class="hint"> Use the results from questions 5 and 9.</p>
      <pre class="answer">
 bg_names &lt;- subset(percent, name %in% both) 
 new &lt;- ddply(bg_names, "name", summarise, diff = avg_per[sex=="boy"] - avg_per[sex =="girl"])

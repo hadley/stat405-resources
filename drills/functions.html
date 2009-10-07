@@ -125,13 +125,13 @@ how_to_index &lt;- function(vec){
   vec / vec[1] * 100
 }</pre></li>
 
-  <li><p> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with equal probability of returning each.</p>
+  <li><p> Randomly return one of the following phrases, "Ace", "King" or "Queen" with equal probability of returning each.</p>
      <pre class="answer">
 random &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1)
 }</pre></li>
 
-  <li><p> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with twice as much probability of returning ``Ace" as either ``King" or ``Queen."</p>
+  <li><p> Randomly return one of the following phrases, "Ace", "King" or "Queen" with twice as much probability of returning "Ace" as either "King" or "Queen."</p>
      <pre class="answer">
  random2 &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
@@ -212,13 +212,13 @@ split_num &lt;- function(num){
   c(trunc(num), num - trunc(num))
 }</pre></li>
 
-  <li><p> Take any character string and add ``...in Stat 405" to the end.</p>
+  <li><p> Take any character string and add "...in Stat 405" to the end.</p>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   paste(fortune, "...in Stat405.")
 }</pre></li>
 
-  <li><p> Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
+  <li><p> Take any character string and add "...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   stopifnot(is.character(fortune))
