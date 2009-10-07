@@ -33,7 +33,7 @@
 <h1>stat405</h1>
 <h2 class="subhead">Function drills</h2>
 
-
+<h3 class="subsubhead">Mathematical operations</h3>
 <ol>
   <li>
     <p>Return the circumference of a circle with the given radius.</p>
@@ -42,14 +42,6 @@ c_circ &lt;- function(r){
   2 * pi * r
 }</pre></li>
   </p>
-  
-  <li>
-    <p>Return the area of a circle with the given radius.</p>
-    <pre class="answer">
-c_area &lt;- function(r) {
-  pi * r ^ 2
-}</pre></li>
-  </p>  
   
     <li><p> Return the area of a circle with the given radius.</p>
      <pre class="answer">
@@ -74,82 +66,47 @@ quad_formula &lt;- function(a, b, c){
     (-b + sqrt(b ^ 2 - 4 * a * c)) / (2 * a))
 }</pre></li>
 
-  <li><p> Return the lowest positive value of a vector.</p>
+  <li><p> Find the least common multiple of two numbers.</p>
      <pre class="answer">
-min_pos &lt;- function(vec){
-  pos &lt;- vec[vec > 0]
-  min(pos)
+LCM &lt;- function(a,b){
+  test &lt;- a * c(1:b)
+  multiples &lt;- test[integer(test/b)] 
+  min(multiples)
 }</pre></li>
 
-  <li><p> Return the second lowest positive value of a vector.</p>
+  <li><p> Find the determinant of a four by four matrix.</p>
      <pre class="answer">
-min2_pos &lt;- function(vec){
-  pos &lt;- vec[vec > 0]
-  pos &lt;- pos[-which(pos == min(pos))]
-  min(pos)
+determinant &lt;- function(matrix){
+  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
 }</pre></li>
 
-
-  <li><p> Divide each element in a numeric vector by the vector's length.</p>
+  <li><p> Display the number of groups of size n can be made from the inputted vector of length k.</p>
      <pre class="answer">
-div_vec &lt;- function(vec){
-  vec / length(vec)
+n_choose_k &lt;- function(n, k){
+  factorial(n) / (factorial(k) * factorial(n - k))
 }</pre></li>
 
-
-  <li><p> Test whether a number is even.</p>
+  <li><p> Return the number of unique permutations that can be from a given vector (caution: don't use large vectors).</p>
      <pre class="answer">
-is.even &lt;- function(num){
-  num %% 2 == 0
-}</pre></li>
-  
-  <li><p> Test whether a number is odd.</p>
-     <pre class="answer">
-is.odd &lt;- function(num){
-  num %% 2 == 1
+num_seqs &lt;- function(vec){
+  n &lt;- length(vec)
+  factorial(n)
 }</pre></li>
 
-  <li><p> If a number is odd add one to it.</p>
+  <li><p> Return the number of unique sets that can be made from an inputted vector.</p>
      <pre class="answer">
-one_to_odd &lt;- function(num){
-  if (is.odd(num))
-    return(num + 1)
-  return(num)
-}</pre></li>
-
-  <li><p> If any number in a numeric vector is odd, add one to it.</p>
-     <pre class="answer">
-one_to_odd2 &lt;- function(vec){
-  vec[is.odd(vec)] &lt;- vec[is.odd(vec)] + 1
-  vec
-}	
-
-# note: this function is better than the previous one
-# It works for numbers AND vectors, and it is simpler</pre></li>
-
-  <li><p> Test whether a number is an integer.</p>
-     <pre class="answer">
-integer &lt;- function(a){
-  trunc(a) == a
+num_sets &lt;- function(vec){
+  vec &lt;- unique(vec)
+  n &lt;- length(vec)
+  my_sum(2 ^ c(0:(n-1)))
 }</pre></li>
 
 
-  <li><p> Find the range of a vector.</p>
-     <pre class="answer">
-my_range &lt;- function(vec){
-  max(vec) - min(vec)
-}</pre></li>
 
-  <li><p>Find the sum of a vector (without using the built-in sum function)</p>
-     <pre class="answer">
-	my_sum &lt;- function(vec){
-	  total &lt;- 0
-	  for (i in 1:length(vec)){
-	  	total &lt;- total + vec[i]
-	  }
-	  total
-	}</pre></li>
+</ol>
 
+<h3 class="subsubhead">Statistical operations</h3>
+<ol>
   <li><p>Calculate the mean of a vector</p>
      <pre class="answer">
 my_mean &lt;- function(vec){
@@ -173,93 +130,19 @@ my_var &lt;- function(vec){
   n &lt;- length(vec)
   sum / (n - 1)
  }</pre></li>
-
-
-
-  <li><p> Automatically create a histogram of a vector.</p>
+ 
+  <li><p> Find the range of a vector.</p>
      <pre class="answer">
-my_hist &lt;- function(vec){
-  hist(vec)
+my_range &lt;- function(vec){
+  max(vec) - min(vec)
 }</pre></li>
 
-  <li><p> Automatically create a histogram of a vector with the given number of bins.</p>
-     <pre class="answer">
-better_hist &lt;- function(vec, n){
-  hist(vec, breaks = n)
-}</pre></li>
-  
-  <li><p> Automatically create a scatterplot matrix with the variables in a given data frame.</p>
-     <pre class="answer">
-scatterplot &lt;- function(df){
-  library(ggplot2)
-  plotmatrix(df)
-}</pre></li>
-  
-
-  <li><p> Find the least common multiple of two numbers.</p>
-     <pre class="answer">
-LCM &lt;- function(a,b){
-  test &lt;- a * c(1:b)
-  multiples &lt;- test[integer(test/b)] 
-  min(multiples)
-}</pre></li>
 
   <li><p> Index a series of observations by the first observation (hint: express each observation as a percentage of the first observation).</p>
      <pre class="answer">
 how_to_index &lt;- function(vec){
   vec / vec[1] * 100
 }</pre></li>
-
-  <li><p> Find the determinant of a four by four matrix.</p>
-     <pre class="answer">
-determinant &lt;- function(matrix){
-  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
-}</pre></li>
-
-
-  
-  <li><p> Separate the integer and decimal parts of a number, return them in a vector of length two.</p>
-     <pre class="answer">
-split_num &lt;- function(num){
-  c(trunc(num), num - trunc(num))
-}</pre></li>
-
-  <li><p> Return the given vector with all NA's removed.</p>
-     <pre class="answer">
-clean &lt;- function(vec){
-  na.omit(vec)
-}</pre></li>
-
-
-
-  <li><p> Return the row numbers of rows in a data frame that contain NA's.</p>
-     <pre class="answer">
-get_NAs &lt;- function(df){
-  new &lt;- na.omit(df)
-  setdiff(row.names(df), row.names(new))
-}</pre></li>
-  
-  <li><p> Return the actual rows of a data frame that contain NA's.</p>
-     <pre class="answer">
-get_NAs2 &lt;- function(df){
-  new &lt;- na.omit(df)
-  rows &lt;- setdiff(row.names(df), row.names(new))
-  df[rows,]
-}</pre></li>
-  
-
-  <li><p> Create a new vector by repeating a given vector a given number of times.</p>
-     <pre class="answer">
-rep_vec &lt;- function(vec, n){
-  rep(vec, n)	
-}</pre></li>
-
-  <li><p> Double each element in a vector (e.g., turn \emph{a,b,c,...} into \emph{a, a, b, b, c,...}).</p>
-     <pre class="answer">
-rep_vec2 &lt;- function(vec, n){
-  vec[rep(1:length(vec), each = n)]
-}</pre></li>
-
 
   <li><p> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with equal probability of returning each.</p>
      <pre class="answer">
@@ -271,119 +154,6 @@ random &lt;- function(){
      <pre class="answer">
  random2 &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
-}</pre></li>
-
-  <li><p> Take any character string and add ``...in Stat 405" to the end.</p>
-     <pre class="answer">
-fortune_cookie &lt;- function(fortune){
-  paste(fortune, "...in Stat405.")
-}</pre></li>
-
-  <li><p> Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
-     <pre class="answer">
-fortune_cookie &lt;- function(fortune){
-  stopifnot(is.character(fortune))
-  paste(fortune, "...in Stat405.")
-}</pre></li>
-
-
-  <li><p> Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.</p>
-     <pre class="answer">
-save_plot &lt;- function(name){
-  filename &lt;- paste("name", "pdf", sep = ".")
-  ggsave(filename, width = 6, height = 6)
-}</pre></li>
-
-  <li><p> Save the current graph with a given width and height as a pdf with the inputted name.</p>
-     <pre class="answer">
-save_plot2 &lt;- function(name, width, height){
-  filename &lt;- paste("name", "pdf", sep = ".")
-  ggsave(filename, width = width, height = height)
-}</pre></li>
-  
-  <li><p> Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv".</p>
-     <pre class="answer">
-save_file &lt;- function(df){
-  filename &lt;- paste(substitute(df), "csv", sep = ".")
-
-  # best method to avoid adding row numbers
-  write.table(file, filename, sep = ",", row = F)
-}</pre></li>
-
-  <li><p> Identify whether an object is a logical, character, or numeric object.</p>
-     <pre class="answer">
-type &lt;- function(obj){
-  mode(obj)
-}</pre></li>
-  
-  <li><p> Display the number of groups of size n can be made from the inputted vector of length k.</p>
-     <pre class="answer">
-n_choose_k &lt;- function(n, k){
-  factorial(n) / (factorial(k) * factorial(n - k))
-}</pre></li>
-
-  <li><p> Return the number of unique permutations that can be from a given vector (caution: don't use large vectors).</p>
-     <pre class="answer">
-num_seqs &lt;- function(vec){
-  n &lt;- length(vec)
-  factorial(n)
-}</pre></li>
-
-  <li><p> Return the number of unique sets that can be made from an inputted vector.</p>
-     <pre class="answer">
-num_sets &lt;- function(vec){
-  vec &lt;- unique(vec)
-  n &lt;- length(vec)
-  my_sum(2 ^ c(0:(n-1)))
-}</pre></li>
-
-  <li><p> Return whichever the entered number is closest to: 0 or 1000.</p>
-     <pre class="answer">
-closest &lt;- function(a){
-  if (a > 1000){
-  	a &lt;- 1000
-  }
-  
-  round(a, -3)
-}</pre></li>
-
-  <li><p> Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.</p>
-     <pre class="answer">
-combos &lt;- function(df){
-  combinations &lt;- table(df[,1], df[,2])
-  df_counts &lt;- as.data.frame(combinations)
-  names(df_counts) &lt;- c(names(df), "count")
-  df_counts &lt;- subset(df_counts, count > 0)
-  df_counts
-}</pre></li>
-
-  <li><p> Automatically plot the above results with each variable on an axis and the number of occurrences (counts) represented by color.</p>
-     <pre class="answer">
-colorful_counts &lt;- function(df){
-  df_counts &lt;- combos(df)
-  df_counts &lt;- within(df_counts, {
-    x &lt;- as.numeric(as.character(df_counts[,1]))
-    y &lt;- as.numeric(as.character(df_counts[,1]))
-  })
-  qplot(x, y, data = df_counts, colour = count)
-}</pre></li>
-
-  <li><p> Create a new vector where each \emph{ith} element is the sum of the first \emph{i} elements of the given vector.</p>
-     <pre class="answer">
-cumsum &lt;- function(vec){
-  new &lt;- vector(length = length(vec))
-  for(i in 1:length(vec)){
-  	new[i] &lt;- my_sum(vec[1:i])
-  }
-  new
-}</pre></li>
-
-
-  <li><p> Select the number in a vector that is the greatest distance from the first element of the vector</p>
-     <pre class="answer">
-select &lt;- function(vec){
-  distance &lt;- abs(vec - vec[1])
-  vec[which(distance == max(distance))]
 }</pre></li>
 
   <li><p> Return whether a vector of numbers is right skewed or left skewed by comparing its mean and median.</p>
@@ -425,6 +195,154 @@ ptile &lt;- function(vec){
   vec[round(.7 * length(vec), 1)]
 }</pre></li>
 
+</ol>
+
+<h3 class="subsubhead">Manipulating individual elements</h3>
+<ol>
+  <li><p> Test whether a number is even.</p>
+     <pre class="answer">
+is.even &lt;- function(num){
+  num %% 2 == 0
+}</pre></li>
+  
+  <li><p> Test whether a number is odd.</p>
+     <pre class="answer">
+is.odd &lt;- function(num){
+  num %% 2 == 1
+}</pre></li>
+
+  <li><p> If a number is odd add one to it.</p>
+     <pre class="answer">
+one_to_odd &lt;- function(num){
+  if (is.odd(num))
+    return(num + 1)
+  return(num)
+}</pre></li>
+
+  <li><p> Test whether a number is an integer.</p>
+     <pre class="answer">
+integer &lt;- function(a){
+  trunc(a) == a
+}</pre></li>
+
+  <li><p> Separate the integer and decimal parts of a number, return them in a vector of length two.</p>
+     <pre class="answer">
+split_num &lt;- function(num){
+  c(trunc(num), num - trunc(num))
+}</pre></li>
+
+  <li><p> Take any character string and add ``...in Stat 405" to the end.</p>
+     <pre class="answer">
+fortune_cookie &lt;- function(fortune){
+  paste(fortune, "...in Stat405.")
+}</pre></li>
+
+  <li><p> Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
+     <pre class="answer">
+fortune_cookie &lt;- function(fortune){
+  stopifnot(is.character(fortune))
+  paste(fortune, "...in Stat405.")
+}</pre></li>
+
+  <li><p> Identify whether an object is a logical, character, or numeric object.</p>
+     <pre class="answer">
+type &lt;- function(obj){
+  mode(obj)
+}</pre></li>
+
+  <li><p> Return whichever the entered number is closest to: 0 or 1000.</p>
+     <pre class="answer">
+closest &lt;- function(a){
+  if (a > 1000){
+  	a &lt;- 1000
+  }
+  
+  round(a, -3)
+}</pre></li>
+
+</ol>
+
+<h3 class="subsubhead">Manipulating vectors</h3>
+<ol>
+  <li><p> Return the lowest positive value of a vector.</p>
+     <pre class="answer">
+min_pos &lt;- function(vec){
+  pos &lt;- vec[vec > 0]
+  min(pos)
+}</pre></li>
+
+  <li><p> Return the second lowest positive value of a vector.</p>
+     <pre class="answer">
+min2_pos &lt;- function(vec){
+  pos &lt;- vec[vec > 0]
+  pos &lt;- pos[-which(pos == min(pos))]
+  min(pos)
+}</pre></li>
+
+
+  <li><p> Divide each element in a numeric vector by the vector's length.</p>
+     <pre class="answer">
+div_vec &lt;- function(vec){
+  vec / length(vec)
+}</pre></li>
+
+  <li><p> If any number in a numeric vector is odd, add one to it.</p>
+     <pre class="answer">
+one_to_odd2 &lt;- function(vec){
+  vec[is.odd(vec)] &lt;- vec[is.odd(vec)] + 1
+  vec
+}	
+
+# note: this function is better than the previous one
+# It works for numbers AND vectors, and it is simpler</pre></li>
+
+
+  <li><p>Find the sum of a vector (without using the built-in sum function)</p>
+     <pre class="answer">
+	my_sum &lt;- function(vec){
+	  total &lt;- 0
+	  for (i in 1:length(vec)){
+	  	total &lt;- total + vec[i]
+	  }
+	  total
+	}</pre></li>
+
+
+  <li><p> Return the given vector with all NA's removed.</p>
+     <pre class="answer">
+clean &lt;- function(vec){
+  na.omit(vec)
+}</pre></li>
+
+  <li><p> Create a new vector by repeating a given vector a given number of times.</p>
+     <pre class="answer">
+rep_vec &lt;- function(vec, n){
+  rep(vec, n)	
+}</pre></li>
+
+  <li><p> Double each element in a vector (e.g., turn \emph{a,b,c,...} into \emph{a, a, b, b, c,...}).</p>
+     <pre class="answer">
+rep_vec2 &lt;- function(vec, n){
+  vec[rep(1:length(vec), each = n)]
+}</pre></li>
+
+  <li><p> Create a new vector where each \emph{ith} element is the sum of the first \emph{i} elements of the given vector.</p>
+     <pre class="answer">
+cumsum &lt;- function(vec){
+  new &lt;- vector(length = length(vec))
+  for(i in 1:length(vec)){
+  	new[i] &lt;- my_sum(vec[1:i])
+  }
+  new
+}</pre></li>
+
+
+  <li><p> Select the number in a vector that is the greatest distance from the first element of the vector</p>
+     <pre class="answer">
+select &lt;- function(vec){
+  distance &lt;- abs(vec - vec[1])
+  vec[which(distance == max(distance))]
+}</pre></li>
 
   <li><p> Return a vector with its elements reordered in a random manner.</p>
      <pre class="answer">
@@ -444,10 +362,97 @@ order2 &lt;- function(vec){
   vec[order(-vec)]
 }</pre></li>
 
-  
-  
-   
+
 </ol>
+
+<h3 class="subsubhead">Manipulating dataframes</h3>
+<ol>
+
+  <li><p> Return the row numbers of rows in a data frame that contain NA's.</p>
+     <pre class="answer">
+get_NAs &lt;- function(df){
+  new &lt;- na.omit(df)
+  setdiff(row.names(df), row.names(new))
+}</pre></li>
+  
+  <li><p> Return the actual rows of a data frame that contain NA's.</p>
+     <pre class="answer">
+get_NAs2 &lt;- function(df){
+  new &lt;- na.omit(df)
+  rows &lt;- setdiff(row.names(df), row.names(new))
+  df[rows,]
+}</pre></li>
+  
+  <li><p> Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv".</p>
+     <pre class="answer">
+save_file &lt;- function(df){
+  filename &lt;- paste(substitute(df), "csv", sep = ".")
+
+  # best method to avoid adding row numbers
+  write.table(file, filename, sep = ",", row = F)
+}</pre></li>  
+
+  <li><p> Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.</p>
+     <pre class="answer">
+combos &lt;- function(df){
+  combinations &lt;- table(df[,1], df[,2])
+  df_counts &lt;- as.data.frame(combinations)
+  names(df_counts) &lt;- c(names(df), "count")
+  df_counts &lt;- subset(df_counts, count > 0)
+  df_counts
+}</pre></li>
+
+  <li><p> Automatically plot the above results with each variable on an axis and the number of occurrences (counts) represented by color.</p>
+     <pre class="answer">
+colorful_counts &lt;- function(df){
+  df_counts &lt;- combos(df)
+  df_counts &lt;- within(df_counts, {
+    x &lt;- as.numeric(as.character(df_counts[,1]))
+    y &lt;- as.numeric(as.character(df_counts[,1]))
+  })
+  qplot(x, y, data = df_counts, colour = count)
+}</pre></li>
+
+</ol>
+
+
+<h3 class="subsubhead">Plotting data</h3>
+<ol>
+  <li><p> Automatically create a histogram of a vector.</p>
+     <pre class="answer">
+my_hist &lt;- function(vec){
+  hist(vec)
+}</pre></li>
+
+  <li><p> Automatically create a histogram of a vector with the given number of bins.</p>
+     <pre class="answer">
+better_hist &lt;- function(vec, n){
+  hist(vec, breaks = n)
+}</pre></li>
+  
+  <li><p> Automatically create a scatterplot matrix with the variables in a given data frame.</p>
+     <pre class="answer">
+scatterplot &lt;- function(df){
+  library(ggplot2)
+  plotmatrix(df)
+}</pre></li>
+
+  <li><p> Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.</p>
+     <pre class="answer">
+save_plot &lt;- function(name){
+  filename &lt;- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = 6, height = 6)
+}</pre></li>
+
+  <li><p> Save the current graph with a given width and height as a pdf with the inputted name.</p>
+     <pre class="answer">
+save_plot2 &lt;- function(name, width, height){
+  filename &lt;- paste("name", "pdf", sep = ".")
+  ggsave(filename, width = width, height = height)
+}</pre></li>
+
+</ol>
+
 
 
 </body>
