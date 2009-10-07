@@ -238,7 +238,8 @@ new &lt;- ddply(players, "country", summarise, ratio = sum(bats == "R") / length
   <li>Create a dataframe that compares the average body mass index (BMI) of players from each state, nation combination. (BMI = weight * 703) / height<sup>2</sup> </li>
      <pre class="answer">
        <code>
-new &lt;- ddply(players, c("state", "country"), summarise, bmi = (mean(weight, na.rm = T) * 703) / mean(height, na.rm = T) ^ 2)
+new &lt;- ddply(players, c("state", "country"), summarise, 
+  bmi = mean(weight * 703 / height ^ 2, na.rm = T))
        </code>
      </pre>  
 
@@ -246,21 +247,27 @@ new &lt;- ddply(players, c("state", "country"), summarise, bmi = (mean(weight, n
   <li>For each player, display the average height of all players with his weight. Put this new variable in a new column. </li>
      <pre class="answer">
        <code>
-heights &lt;- ddply(players, "weight", transform, avg_height = mean(height, na.rm = T))
+heights &lt;- ddply(players, "weight", transform, 
+  avg_height = mean(height, na.rm = T))
        </code>
      </pre>  
 
-  <li>Make a dataframe that displays just the average weight of players from each state. <pre class="hint">Don't be surprised to see numbers in the states column. The players data set records some states as numbers.</pre></li>
+  <li>Make a dataframe that displays just the average weight of players from each state.
+    
+    <p class="hint">Don't be surprised to see numbers in the states column. The players data set records some states as numbers.</p>
      <pre class="answer">
        <code>
-new &lt;- ddply(players, "state", summarise, avg_weight = mean(weight))
+new &lt;- ddply(players, "state", summarise, 
+  avg_weight = mean(weight))
        </code>
      </pre>  
-     
+  </li>
+  
   <li>Add a column to the players data set that displays the average weight for all players from the player's state who throw with the same hand as the player. </li>
      <pre class="answer">
        <code>
-new &lt;- ddply(players, c("state", "throws"), transform, avg_weight = mean(weight, na.rm = T))
+new &lt;- ddply(players, c("state", "throws"), transform, 
+  avg_weight = mean(weight, na.rm = T))
        </code>
      </pre>  
 
