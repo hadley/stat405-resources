@@ -1,58 +1,18 @@
-
 <html>
+
 <head>
-  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css">
-  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/base/base-min.css"> 
-  
-  <script type="text/javascript" src="jquery-1.3.2.min.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function() {
-      $("#nav").css("position", "absolute");
-  });
-  $(window).scroll(function() {
-      $("#nav").animate({top: $(window).scrollTop() + "px"}, {queue: false});
-  });
-  </script>
-
-  <style>
-  #bd {font-size: 116%;}
-  code.bad {color: red;}
-
-  #yui-main h2 {
-    margin-top: 2em;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  h3 {font-size: 1em; margin-bottom: 0.25em; margin-top: 1.5em;}
-
-  .example {
-    background-color: #eee; 
-    border: 1px solid #ccc;
-    margin-bottom: 1em;
-    font-size: 93%;
-  }
-  dl {margin-left: 1em;}
-  dl dd {margin-left: 0; margin-bottom: 0.5em;}
-  dl dt {margin-top: 1em;}
-  
-  #nav ul {margin-left: 0;}
-  #nav ul li {list-style: none; margin-bottom: 0.5em;}
-  
-  </style>
-  
-  <title>plyr function drills</title>
-  
+  <title>function drills. stat405. had.co.nz</title>
+  <link rel="stylesheet" type="text/css" href="/style.css">
+  <script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="interactive.js"></script>
 </head>
 
 <body>
-  
-<div id="doc" class="yui-t5">
-<div id="bd">
-<div id="yui-main">
-<div class="yui-b"><div class="yui-g">
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/header.html"); ?>
+<div id="wrap">
 
-<h1>plyr function drills</h1>
-<h1>by Garrett Grolemund</h1>
+<h1>stat405</h1>
+<h2 class="subhead">Function drills, by Garrett Grolemund</h2>
 
 <h2>Diamonds data set</h2>
 
@@ -486,5 +446,9 @@ subset(newest, percent == max(percent))
 
 </ol>
 
+
+</div>
+
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/stat405/footer.html"); ?>
 </body>
 </html>
