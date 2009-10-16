@@ -4,26 +4,7 @@
   <title>function drills. stat405. had.co.nz</title>
   <link rel="stylesheet" type="text/css" href="/style.css">
   <script type="text/javascript" src="../jquery-1.3.2.min.js"></script>
-  <script type="text/javascript">
-  $(document).ready(function() {
-      $("pre.answer").
-        css("display", "none")
-      $("li p").
-        append("<span>  <a class='toggle'>Show answer</a>.</span>");
-      $("a.toggle").click(function() {
-        code = $(this).parent().parent().next();
-        if (code.css("display") == "none") {
-          code.slideDown();
-          $(this).text("Hide answer");          
-        } else {
-          code.slideUp();
-          $(this).text("Show answer");
-        }
-        false;
-      })
-  });
-  
-  </script>
+  <script type="text/javascript" src="interactive.js"></script>
 </head>
 
 <body>
@@ -31,7 +12,7 @@
 <div id="wrap">
 
 <h1>stat405</h1>
-<h2 class="subhead">Function drills</h2>
+<h2 class="subhead">Function drills, by Garrett Grolemund</h2>
 
 <h3 class="subsubhead">Mathematical operations</h3>
 <ol>
@@ -144,13 +125,13 @@ how_to_index &lt;- function(vec){
   vec / vec[1] * 100
 }</pre></li>
 
-  <li><p> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with equal probability of returning each.</p>
+  <li><p> Randomly return one of the following phrases, "Ace", "King" or "Queen" with equal probability of returning each.</p>
      <pre class="answer">
 random &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1)
 }</pre></li>
 
-  <li><p> Randomly return one of the following phrases, ``Ace", ``King" or ``Queen" with twice as much probability of returning ``Ace" as either ``King" or ``Queen."</p>
+  <li><p> Randomly return one of the following phrases, "Ace", "King" or "Queen" with twice as much probability of returning "Ace" as either "King" or "Queen."</p>
      <pre class="answer">
  random2 &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
@@ -231,13 +212,13 @@ split_num &lt;- function(num){
   c(trunc(num), num - trunc(num))
 }</pre></li>
 
-  <li><p> Take any character string and add ``...in Stat 405" to the end.</p>
+  <li><p> Take any character string and add "...in Stat 405" to the end.</p>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   paste(fortune, "...in Stat405.")
 }</pre></li>
 
-  <li><p> Take any character string and add ``...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
+  <li><p> Take any character string and add "...in Stat 405" to the end. Check that the input is a character string. Return an error if it is not.</p>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   stopifnot(is.character(fortune))
@@ -454,6 +435,8 @@ save_plot2 &lt;- function(name, width, height){
 </ol>
 
 
+</div>
 
+<?php include($_SERVER["DOCUMENT_ROOT"] . "/stat405/footer.html"); ?>
 </body>
 </html>
