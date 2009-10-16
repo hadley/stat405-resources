@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsbsy,amscd,amsfonts,amsgen,amsmath,amsopn,amssymb,amstext,amsthm,amsxtra}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{verbatim}
+\addtolength{\textwidth}{1.5in}
+\addtolength{\hoffset}{-.75in}
+\addtolength{\textheight}{1in}
+\addtolength{\voffset}{-1in}
+
+% Alter some LaTeX defaults for better treatment of figures:
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+    \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+    \renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+    %   Parameters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+	% remember to use [htpb] or [htpb] for placement
+
+
+
+\begin{document}
+
+\title{Our title}
+\author{us}
+\date{\today}
+\maketitle
+
+
+%-------------------------------------------------------------------
+% Begin entering your LaTeX document content here...
+\noindent A summary of what we did. An explanation of what that graph is below and why it is important.
+
+\begin{figure}[htpb]
+  \centering
+  \includegraphics[width=\textwidth]{names.pdf} % requires the graphicx
+  %\caption{Optional caption }
+  \label{fig:names}
+\end{figure}
+
+
+\noindent Our conclusion.
+
+
+\end{document}
