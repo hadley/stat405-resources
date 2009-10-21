@@ -21,17 +21,17 @@
     <pre>
 c_circ &lt;- function(r)
   2 * pi * r
-}</pre></li>
+}</pre>
     <pre class="answer">
 c_circ &lt;- function(r){
   2 * pi * r
-}</pre></li>
+}</pre>
   
     <li><p> Return the area of a circle with the given radius.</p>
      <pre>
 c_vol &lt;- function(r){
   4 * pi * r ^ 3 / 3
-}</pre></li>
+}</pre>
      <pre class="answer">
 c_vol &lt;- function(r){
   4 / 3 * pi * r ^ 3
@@ -44,7 +44,7 @@ c_stats &lt;- function(r){
     area == c_area(r),
     volume == c_vol(r)
   )
-}</pre></li>
+}</pre>
      <pre class="answer">
 c_stats &lt;- function(r){
   c(circumference = c_circ(r),
@@ -59,7 +59,7 @@ quad_formula &lt;- function(a, b, c){
   stopifnot(b ^ 2 >= 4 * a * c)
   c(-b - sqrt(b ^ 2 - 4 * a * c) / 2 * a,
     -b + sqrt(b ^ 2 - 4 * a * c) / 2 * a)
-}</pre></li>
+}</pre>
      <pre class="answer">
 quad_formula &lt;- function(a, b, c){
   stopifnot(b ^ 2 >= 4 * a * c)
@@ -73,7 +73,7 @@ LCM &lt;- function(a,b){
   test &lt;- a * c(1:b)
   multiples &lt;- test[integer(test/b),] 
   min(multiples)
-}</pre></li>
+}</pre>
      <pre class="answer">
 LCM &lt;- function(a,b){
   test &lt;- a * c(1:b)
@@ -85,7 +85,7 @@ LCM &lt;- function(a,b){
      <pre>
 determinant &lt;- function(matrix){
 matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
-}</pre></li>
+}</pre>
      <pre class="answer">
 determinant &lt;- function(matrix){
   matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
@@ -95,7 +95,7 @@ determinant &lt;- function(matrix){
      <pre>
 n_choose_k &lt;- function(a, b){
   factorial(b) / (factorial(a) * factorial(b - a))
-}</pre></li>
+}</pre>
      <pre class="answer">
 n_choose_k &lt;- function(n, k){
   factorial(n) / (factorial(k) * factorial(n - k))
@@ -105,7 +105,7 @@ n_choose_k &lt;- function(n, k){
      <pre>
 num_seqs &lt;- function(vec){
   n &lt;- length(vec) factorial(n)
-}</pre></li>
+}</pre>
      <pre class="answer">
 num_seqs &lt;- function(vec){
   n &lt;- length(vec)
@@ -118,7 +118,7 @@ num_sets &lt;- function(vec){
   vec &lt;- unique(vec)
   n &lt;- length(vec)
   my_sum(2 ^ c(0:n-1)
-}</pre></li>
+}</pre>
      <pre class="answer">
 num_sets &lt;- function(vec){
   vec &lt;- unique(vec)
@@ -133,7 +133,7 @@ num_sets &lt;- function(vec){
      <pre>
 my_mean &lt;- function(vec){
   my_sum(vec)/length(vec)
-}</pre></li>
+}</pre>
      <pre class="answer">
 my_mean &lt;- function(vec){
   my_sum(vec) / length(vec)
@@ -143,7 +143,7 @@ my_mean &lt;- function(vec){
      <pre>
 my_mean2 &lt;- function(vec){
   sum(vec) / length(vec)
-}</pre></li>
+}</pre>
      <pre class="answer">
 my_mean2 &lt;- function(vec){
   sum(vec, na.rm = T) / length(vec)
@@ -159,7 +159,7 @@ my_var &lt;- function(vec){
   This is the sample variance
   n &lt;- length(vec)
   sum / (n - 1)
- }</pre></li>
+ }</pre>
       <pre class="answer">
 my_var &lt;- function(vec){
   xbar &lt;- my_mean(vec)
@@ -175,7 +175,7 @@ my_var &lt;- function(vec){
      <pre >
 my_range &lt;- function(vec){
   range &lt;- max(vec) - min(vec)
-}</pre></li>
+}</pre>
      <pre class="answer">
 my_range &lt;- function(vec){
   max(vec) - min(vec)
@@ -186,7 +186,7 @@ my_range &lt;- function(vec){
      <pre>
 how_to_index &lt;- function(vec){
   vec / vec(1) * 100
-}</pre></li>
+}</pre>
      <pre class="answer">
 how_to_index &lt;- function(vec){
   vec / vec[1] * 100
@@ -196,7 +196,7 @@ how_to_index &lt;- function(vec){
      <pre>
 random &lt;- function(){
   sample(c(Ace, King, Queen), 1)
-}</pre></li>
+}</pre>
      <pre class="answer">
 random &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1)
@@ -206,7 +206,7 @@ random &lt;- function(){
      <pre>
  random2 &lt;- function(){
   sample(("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
-}</pre></li>
+}</pre>
      <pre class="answer">
  random2 &lt;- function(){
   sample(c("Ace", "King", "Queen"), 1, prob = c(2, 1, 1))
@@ -221,7 +221,7 @@ skew &lt;- function(vec){
   if (mean(vec) > median(vec))
   return("right-skewed")
   return("symmetric")
-}</pre></li>
+}</pre>
      <pre class="answer">
 # note: this concept only works for large amounts of skew - Garrett
 skew &lt;- function(vec){
@@ -237,7 +237,7 @@ skew &lt;- function(vec){
 mode_vec &lt;- function(vec){
   counts &lt;- as.data.frame(table(vec))$Freq
   vec[which(counts = max(counts))]
-}</pre></li>
+}</pre>
      <pre class="answer">
 mode_vec &lt;- function(vec){
   counts &lt;- as.data.frame(table(vec))$Freq
@@ -249,7 +249,7 @@ mode_vec &lt;- function(vec){
 ptile100 &lt;- function(vec){
   vec[order(vec)]
   vec["70"]
-}</pre></li>
+}</pre>
      <pre class="answer">
 ptile100 &lt;- function(vec){
   vec[order(vec)]
@@ -261,7 +261,7 @@ ptile100 &lt;- function(vec){
 ptile10 == function(vec){
   vec[order(vec)]
   vec[7]
-}</pre></li>
+}</pre>
      <pre class="answer">
 ptile10 &lt;- function(vec){
   vec[order(vec)]
@@ -272,7 +272,7 @@ ptile10 &lt;- function(vec){
      <pre>
 ptile &lt;- function(vec){
   vec[round(.7 * length(vec), 1)]
-}</pre></li>
+}</pre>
      <pre class="answer">
 ptile &lt;- function(vec){
   vec[order(vec)]
@@ -284,7 +284,7 @@ ptile &lt;- function(vec){
      <pre>
 is.even &lt;- function(num){
   num %% 2 = 0
-}</pre></li>
+}</pre>
      <pre class="answer">
 is.even &lt;- function(num){
   num %% 2 == 0
@@ -294,7 +294,7 @@ is.even &lt;- function(num){
      <pre>
 is.odd &lt;- function(num){
   num % % 2 == 1
-}</pre></li>
+}</pre>
      <pre class="answer">
 is.odd &lt;- function(num){
   num %% 2 == 1
@@ -306,7 +306,7 @@ one_to_odd &lt;- function(num){
   if (is.odd(num))
     num + 1
   num
-}</pre></li>
+}</pre>
      <pre class="answer">
 one_to_odd &lt;- function(num){
   if (is.odd(num))
@@ -318,7 +318,7 @@ one_to_odd &lt;- function(num){
      <pre>
 integer &lt;- function(a){
   trunc(a) = a
-}</pre></li>
+}</pre>
      <pre class="answer">
 integer &lt;- function(a){
   trunc(a) == a
@@ -328,7 +328,7 @@ integer &lt;- function(a){
      <pre>
 split_num &lt;- function(num){
   c(trunc(num), num - trunc(num)
-}</pre></li>
+}</pre>
      <pre class="answer">
 split_num &lt;- function(num){
   c(trunc(num), num - trunc(num))
@@ -338,7 +338,7 @@ split_num &lt;- function(num){
      <pre>
 fortune_cookie &lt;- function(fortune){
   paste(fortune, ...in Stat405.)
-}</pre></li>
+}</pre>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   paste(fortune, "...in Stat405.")
@@ -349,7 +349,7 @@ fortune_cookie &lt;- function(fortune){
 fortune_cookie &lt;- function(fortune){
   stopifnot(is.character("fortune"))
   paste(fortune, "...in Stat405.")
-}</pre></li>
+}</pre>
      <pre class="answer">
 fortune_cookie &lt;- function(fortune){
   stopifnot(is.character(fortune))
@@ -360,7 +360,7 @@ fortune_cookie &lt;- function(fortune){
      <pre>
 type &lt;- function(objecttotest){
   mode(objecttotest)
-}</pre></li>
+}</pre>
      <pre class="answer">
 type &lt;- function(obj){
   mode(obj)
@@ -374,7 +374,7 @@ closest &lt;- function(a){
   }
   
   round(a, -3)
-}</pre></li>
+}</pre>
      <pre class="answer">
 closest &lt;- function(a){
   if (a > 1000){
@@ -390,7 +390,7 @@ closest &lt;- function(a){
 min_pos &lt;- function(vec){
   pos &lt;- vec[vec >> 0]
   min(pos)
-}</pre></li>
+}</pre>
      <pre class="answer">
 min_pos &lt;- function(vec){
   pos &lt;- vec[vec > 0]
@@ -403,7 +403,7 @@ min2_pos &lt;- function(vec){
   pos &lt;- vec[vec > 0]
   pos &lt;- pos[-min(pos)]
   min(pos, na.rm = T)
-}</pre></li>
+}</pre>
      <pre class="answer">
 min2_pos &lt;- function(vec){
   pos &lt;- vec[vec > 0]
@@ -416,7 +416,7 @@ min2_pos &lt;- function(vec){
      <pre>
 div_vec &lt;- function(vec){
   vec / nrow(vec)
-}</pre></li>
+}</pre>
      <pre class="answer">
 div_vec &lt;- function(vec){
   vec / length(vec)
@@ -429,7 +429,7 @@ one_to_odd2 &lt;- function(vec){
 }	
 
 # note: this function is better than the previous one (one_to_odd)
-# It works for numbers AND vectors, and it is simpler</pre></li>
+# It works for numbers AND vectors, and it is simpler</pre>
      <pre class="answer">
 one_to_odd2 &lt;- function(vec){
   vec[is.odd(vec)] &lt;- vec[is.odd(vec)] + 1
@@ -448,7 +448,7 @@ one_to_odd2 &lt;- function(vec){
 	  	total &lt;- total + vec[i]
 	  }
 	  total
-	}</pre></li>
+	}</pre>
 	     <pre class="answer">
 	my_sum &lt;- function(vec){
 	  total &lt;- 0
@@ -463,7 +463,7 @@ one_to_odd2 &lt;- function(vec){
      <pre>
 clean &lt;- function(vec){
   vec[vec != NA]
-}</pre></li>
+}</pre>
      <pre class="answer">
 clean &lt;- function(vec){
   na.omit(vec)
@@ -473,7 +473,7 @@ clean &lt;- function(vec){
      <pre>
 rep_vec &lt;- function(vec, n){
   rep(vec. n)	
-}</pre></li>
+}</pre>
      <pre class="answer">
 rep_vec &lt;- function(vec, n){
   rep(vec, n)	
@@ -483,7 +483,7 @@ rep_vec &lt;- function(vec, n){
      <pre>
 rep_vec2 &lt;- function(vec, n){
   vec[rep(1-length(vec), each = n)]
-}</pre></li>
+}</pre>
      <pre class="answer">
 rep_vec2 &lt;- function(vec){
   vec[rep(1:length(vec), each = 2)]
@@ -496,7 +496,7 @@ cumsum &lt;- function(vec){
   for(i in 1:length(vec)){
   	new[i] &lt;- my_sum(vec[1 to i])
   }
-}</pre></li>
+}</pre>
      <pre class="answer">
 cumsum &lt;- function(vec){
   new &lt;- vector(length = length(vec))
@@ -512,7 +512,7 @@ cumsum &lt;- function(vec){
 select &lt;- function(vec){
   distance &lt;- abs(vec - vec[1])
   vec[which(distance = max(distance))]
-}</pre></li>
+}</pre>
      <pre class="answer">
 select &lt;- function(vec){
   distance &lt;- abs(vec - vec[1])
@@ -523,7 +523,7 @@ select &lt;- function(vec){
      <pre>
 shuffle &lt;- function(vec){
   sample(vec, length(vec), replace = False) 
-}</pre></li>
+}</pre>
      <pre class="answer">
 shuffle &lt;- function(vec){
   sample(vec, length(vec), replace = FALSE) 
@@ -533,7 +533,7 @@ shuffle &lt;- function(vec){
      <pre>
 order1 &lt;- function(vec){
   order(vec)
-}</pre></li>
+}</pre>
      <pre class="answer">
 order1 &lt;- function(vec){
   vec[order(vec)]
@@ -543,7 +543,7 @@ order1 &lt;- function(vec){
      <pre>
 order2 &lt;- function(vec){
   vec[-order(vec)]
-}</pre></li>
+}</pre>
      <pre class="answer">
 order2 &lt;- function(vec){
   vec[order(-vec)]
@@ -557,7 +557,7 @@ order2 &lt;- function(vec){
 get_NAs &lt;- function(df){
   new &lt;- na.omit(df)
   setdiff(row.names(c(df,new))
-}</pre></li>
+}</pre>
      <pre class="answer">
 get_NAs &lt;- function(df){
   new &lt;- na.omit(df)
@@ -570,7 +570,7 @@ get_NAs2 &lt;- function(df){
   new &lt;- na.omit(df)
   rows &lt;- setdiff(row.names(df), row.names(new))
   df[rows]
-}</pre></li>
+}</pre>
      <pre class="answer">
 get_NAs2 &lt;- function(df){
   new &lt;- na.omit(df)
@@ -585,7 +585,7 @@ save_file &lt;- function(df){
 
   # best method to avoid adding row numbers
   write.table(file, filename, sep = ",", row = F)
-}</pre></li> 
+}</pre> 
      <pre class="answer">
 save_file &lt;- function(df){
   filename &lt;- paste(substitute(df), "csv", sep = ".")
@@ -601,7 +601,7 @@ combos &lt;- function(df){
   df_counts &lt;- as.data.frame(combinations)
   names(df_counts) &lt;- c(names(df), "count")
   df_counts &lt;- subset(df_counts, count > 0)
-}</pre></li>
+}</pre>
      <pre class="answer">
 combos &lt;- function(df){
   combinations &lt;- table(df[,1], df[,2])
@@ -620,7 +620,7 @@ colorful_counts &lt;- function(df){
     y &lt;- as.numeric(as.character(df_counts[,1]))
   )
   qplot(x, y, data = df_counts, colour = count)
-}</pre></li>
+}</pre>
      <pre class="answer">
 colorful_counts &lt;- function(df){
   df_counts &lt;- combos(df)
@@ -637,7 +637,7 @@ colorful_counts &lt;- function(df){
      <pre>
 my_hist &lt;- function(vec){
   hist{vec}
-}</pre></li>
+}</pre>
      <pre class="answer">
 my_hist &lt;- function(vec){
   hist(vec)
@@ -647,30 +647,18 @@ my_hist &lt;- function(vec){
      <pre>
 better_hist &lt;- function(vec, n){
   hist(vec; breaks = n)
-}</pre></li>
+}</pre>
      <pre class="answer">
 better_hist &lt;- function(vec, n){
   hist(vec, breaks = n)
 }</pre></li>
   
-  <li><p> Automatically create a scatterplot matrix with the variables in a given data frame.</p>
-     <pre>
-scatterplot &lt;- function(df){
-  library("ggplot2")
-  plotmatrix(df)
-}</pre></li>
-     <pre class="answer">
-scatterplot &lt;- function(df){
-  library(ggplot2)
-  plotmatrix(df)
-}</pre></li>
-
   <li><p> Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.</p>
      <pre>
 save_plot &lt;- function(name){
   filename &lt;- paste(name, pdf, sep = ".")
   ggsave("filename", width = 6, height = 6)
-}</pre></li>
+}</pre>
      <pre class="answer">
 save_plot &lt;- function(name){
   filename &lt;- paste("name", "pdf", sep = ".")
@@ -682,7 +670,7 @@ save_plot &lt;- function(name){
 save_plot2 &lt;- function(name, width, height){
   filename &lt;- paste("name", "pdf", sep = ".")
   ggsave(filename, width == width, height == height)
-}</pre></li>
+}</pre>
      <pre class="answer">
 save_plot2 &lt;- function(name, width, height){
   filename &lt;- paste("name", "pdf", sep = ".")

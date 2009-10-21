@@ -17,7 +17,7 @@ $(document).ready(function() {
     $("li p:first-child").
       append("<span>  <a class='toggle' href='#'>Show answer</a>.</span>");
     $("a.toggle").click(function() {
-      code = $(this).closest("li").find("pre");
+      code = $(this).closest("li").find("pre.answer");
       if (code.css("display") == "none") {
         code.slideDown();
         $(this).text("Hide answer");          
