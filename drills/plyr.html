@@ -142,10 +142,10 @@ new &lt;- ddply(players, "country", summarise, avg_height = mean(height))</pre><
 new &lt;- ddply(players, "country", summarise, ratio = sum(bats == "R") / length(bats))</pre></li>  
 
 
-  <li><p>Create a dataframe that compares the average body mass index (BMI) of players from each state, nation combination. (BMI = weight * 703) / height<sup>2</sup> 
+  <li><p>Create a dataframe that compares the average body mass index (BMI) of players from each state, nation combination. (BMI = (weight * 703) / height<sup>2</sup>). 
      <pre class="answer">
 new &lt;- ddply(players, c("state", "country"), summarise, 
-  bmi = mean(weight * 703 / height ^ 2, na.rm = T))</pre></li>  
+  bmi = mean((weight * 703) / height ^ 2, na.rm = T))</pre></li>  
 
 
   <li><p>For each player, display the average height of all players with his weight. Put this new variable in a new column. 
@@ -178,25 +178,25 @@ named &lt;- subset(players, nickname != "")</pre></li>
    <p class="hint"> Avoid NA's by using <code>mean(weight, na.rm = T)</code>
     <pre class="answer">
 mean(named$weight, na.rm = T)
-summarise(players[players$nickname == "",], mean(weight, na.rm = T))
+summarise(players[players$nickname == "", ], mean(weight, na.rm = T))
 
 # no</pre></li>  
 
   <li>
     <p>Which country has the fattest players (on average)?</p>
     <p class="hint">Measure fatness by the body mass index.</p>
-    <p class="hint">Use <code>order()</code> and subsetting to sort entries by weight. For example, <code>players[order(-players$weight),]</code></p>
+    <p class="hint">Use <code>order()</code> and subsetting to sort entries by weight. For example, <code>players[order(-players$weight), ]</code></p>
     
      <pre class="answer">
 new &lt;- ddply(players, "country", summarise, avg_weight = mean(weight, na.rm = T))
-new[order(-new$avg_weight),]
+new[order(-new$avg_weight), ]
 
 # Indonesia</pre></li>  
 
   <li><p>From which states have the most baseball players come from? 
      <pre class="answer">
 new &lt;- ddply(players, "state", summarise, number = length(state))
-new[order(-new$number),]
+new[order(-new$number), ]
 
 # California, out of the country, Texas, etc.</pre></li>  
 
@@ -257,13 +257,8 @@ subset(years, year == 1)
   <li><p>Create a new column that displays the number of genders the name was used for each year. Note: not recommended for slower computers.
      <pre class="answer">
 boygirl &lt;- ddply(names, c("year", "name"), transform, both = length(year))
+</pre></li>  
 
-# or
-
-years2 &lt;- ddply(names, "name", summarise, year2 = length(name))
-temp &lt;- merge(years, years2, by = "name") #years from question 2
-boths &lt;- subset(temp, year != year2)
-boths &lt;- unique(boths$name)</pre></li>  
   <li><p>Make a data set of names that have been both boy and girl names.</p>
     <p class="hint">Use the results from above.</p>
     <p class="hint"><code>unique()</code> removes identical rows in a dataframe. Apply this to your results to get a concise list.</p>
@@ -271,7 +266,16 @@ boths &lt;- unique(boths$name)</pre></li>
 
      <pre class="answer">
 new &lt;- subset(boygirl, both == 2)
-boths &lt;- unique(new[,2])</pre></li>  
+boths &lt;- unique(new[, 2])
+
+
+# or
+
+years2 &lt;- ddply(names, "name", summarise, year2 = length(name))
+temp &lt;- merge(years, years2, by = "name") #years from question 2
+boths &lt;- subset(temp, year != year2)
+boths &lt;- unique(boths$name)
+</pre></li>  
 
   <li><p>For each year, display the total number of names that were used. Treat boy and girl versions of the same name as two separate names.
      <pre class="answer">

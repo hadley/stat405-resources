@@ -26,6 +26,12 @@ c_circ &lt;- function(r){
   
     <li><p> Return the area of a circle with the given radius.</p>
      <pre class="answer">
+c_area &lt;- function(r){
+  pi * r ^ 2
+}</pre></li>
+
+    <li><p> Return the volume of a circle with the given radius.</p>
+     <pre class="answer">
 c_vol &lt;- function(r){
   4 / 3 * pi * r ^ 3
 }</pre></li>
@@ -37,7 +43,10 @@ c_stats &lt;- function(r){
     area = c_area(r),
     volume = c_vol(r)
   )
-}</pre></li>
+}
+
+# note: c_circ(), c_area(), and c_vol() were all defined in the previous drills
+</pre></li>
 
   <li><p> Given the coefficients of a quadratic polynomial, return the roots.</p>
      <pre class="answer">
@@ -49,16 +58,19 @@ quad_formula &lt;- function(a, b, c){
 
   <li><p> Find the least common multiple of two numbers.</p>
      <pre class="answer">
-LCM &lt;- function(a,b){
+LCM &lt;- function(a, b){
   test &lt;- a * c(1:b)
-  multiples &lt;- test[integer(test/b)] 
+  
+  #note: my_integer is a function created in the 
+  # drill Manipulating Individual Elements 4
+  multiples &lt;- test[my_integer(test / b)] 
   min(multiples)
 }</pre></li>
 
-  <li><p> Find the determinant of a four by four matrix.</p>
+  <li><p> Find the determinant of a two by two matrix.</p>
      <pre class="answer">
 determinant &lt;- function(matrix){
-  matrix[1,1] * matrix[2,2] - matrix[1,2] * matrix[2,1]
+  matrix[1, 1] * matrix[2, 2] - matrix[1, 2] * matrix[2, 1]
 }</pre></li>
 
   <li><p> Display the number of groups of size n can be made from the inputted vector of length k.</p>
@@ -67,7 +79,7 @@ n_choose_k &lt;- function(n, k){
   factorial(n) / (factorial(k) * factorial(n - k))
 }</pre></li>
 
-  <li><p> Return the number of unique permutations that can be from a given vector (caution: don't use large vectors).</p>
+  <li><p> Return the number of unique permutations that can be from a given vector. Assume that each element in the vector is unique. (caution: don't use large vectors).</p>
      <pre class="answer">
 num_seqs &lt;- function(vec){
   n &lt;- length(vec)
@@ -91,7 +103,7 @@ num_sets &lt;- function(vec){
   <li><p>Calculate the mean of a vector</p>
      <pre class="answer">
 my_mean &lt;- function(vec){
-  my_sum(vec)/length(vec)
+  my_sum(vec) / length(vec)
 }</pre></li>
   
 <li><p>Calculate the mean of a vector, removing missing values.</p>
@@ -151,8 +163,9 @@ skew &lt;- function(vec){
   <li><p> Find the (statistical) mode of a vector.</p>
      <pre class="answer">
 mode_vec &lt;- function(vec){
-  counts &lt;- as.data.frame(table(vec))$Freq
-  vec[which(counts == max(counts))]
+  counts &lt;- as.data.frame(table(vec))
+  most_freq <- which(counts[, 2] == max(counts[, 2]))
+  counts[most_freq, 2]
 }</pre></li>
 
   <li><p> Given a numeric vector of length 100, determine which element occurs at the 70th percentile.</p>
@@ -178,6 +191,8 @@ ptile &lt;- function(vec){
 
 </ol>
 
+
+
 <h3 class="subsubhead">Manipulating individual elements</h3>
 <ol>
   <li><p> Test whether a number is even.</p>
@@ -197,12 +212,12 @@ is.odd &lt;- function(num){
 one_to_odd &lt;- function(num){
   if (is.odd(num))
     return(num + 1)
-  return(num)
+  num
 }</pre></li>
 
   <li><p> Test whether a number is an integer.</p>
      <pre class="answer">
-integer &lt;- function(a){
+my_integer &lt;- function(a){
   trunc(a) == a
 }</pre></li>
 
@@ -234,14 +249,13 @@ type &lt;- function(obj){
   <li><p> Return whichever the entered number is closest to: 0 or 1000.</p>
      <pre class="answer">
 closest &lt;- function(a){
-  if (a > 1000){
-  	a &lt;- 1000
-  }
-  
-  round(a, -3)
+  ifelse(a > 500, 1000, 0)  
 }</pre></li>
 
 </ol>
+
+
+
 
 <h3 class="subsubhead">Manipulating vectors</h3>
 <ol>
@@ -256,8 +270,7 @@ min_pos &lt;- function(vec){
      <pre class="answer">
 min2_pos &lt;- function(vec){
   pos &lt;- vec[vec > 0]
-  pos &lt;- pos[-which(pos == min(pos))]
-  min(pos)
+  sort(pos)[2]
 }</pre></li>
 
 
@@ -301,21 +314,21 @@ rep_vec &lt;- function(vec, n){
   rep(vec, n)	
 }</pre></li>
 
-  <li><p> Double each element in a vector (e.g., turn \emph{a,b,c,...} into \emph{a, a, b, b, c,...}).</p>
+  <li><p> Double each element in a vector (e.g., turn {a,b,c,...} into {a, a, b, b, c,...}).</p>
      <pre class="answer">
 rep_vec2 &lt;- function(vec, n){
-  vec[rep(1:length(vec), each = n)]
+  rep(vec, each = 2)
 }</pre></li>
 
-  <li><p> Create a new vector where each \emph{ith} element is the sum of the first \emph{i} elements of the given vector.</p>
+  <li><p> Create a new vector where each ith element is the sum of the first i elements of the given vector.</p>
      <pre class="answer">
 cumsum &lt;- function(vec){
-  new &lt;- vector(length = length(vec))
   for(i in 1:length(vec)){
-  	new[i] &lt;- my_sum(vec[1:i])
+  	vec[i] &lt;- sum(vec[1:i])
   }
-  new
-}</pre></li>
+  vec
+} 
+</pre></li>
 
 
   <li><p> Select the number in a vector that is the greatest distance from the first element of the vector</p>
@@ -334,13 +347,13 @@ shuffle &lt;- function(vec){
   <li><p> Return a vector with its elements ordered from smallest to largest.</p>
      <pre class="answer">
 order1 &lt;- function(vec){
-  vec[order(vec)]
+  sort(vec)
 }</pre></li>
 
   <li><p> Return a vector with its elements ordered largest to smallest.</p>
      <pre class="answer">
 order2 &lt;- function(vec){
-  vec[order(-vec)]
+  -sort(-vec)
 }</pre></li>
 
 
@@ -361,7 +374,7 @@ get_NAs &lt;- function(df){
 get_NAs2 &lt;- function(df){
   new &lt;- na.omit(df)
   rows &lt;- setdiff(row.names(df), row.names(new))
-  df[rows,]
+  df[rows, ]
 }</pre></li>
   
   <li><p> Save a copy of a data frame as a comma separated values file whose filename is the name of the data frame plus ".csv".</p>
@@ -373,10 +386,20 @@ save_file &lt;- function(df){
   write.table(file, filename, sep = ",", row = F)
 }</pre></li>  
 
+
+  <li><p> Re-order the rows of a data frame so that the entries in the first column go from smallest to largest as you read down the column.</p>
+     <pre class="answer">
+order_df &lt;- function(df){
+  df[order(df[, 1]), ]
+}</pre></li>
+
+
+
+
   <li><p> Given a data frame with two columns, return all of the combinations of the two variables that occur once or more.</p>
      <pre class="answer">
 combos &lt;- function(df){
-  combinations &lt;- table(df[,1], df[,2])
+  combinations &lt;- table(df[, 1], df[, 2])
   df_counts &lt;- as.data.frame(combinations)
   names(df_counts) &lt;- c(names(df), "count")
   df_counts &lt;- subset(df_counts, count > 0)
@@ -388,8 +411,8 @@ combos &lt;- function(df){
 colorful_counts &lt;- function(df){
   df_counts &lt;- combos(df)
   df_counts &lt;- within(df_counts, {
-    x &lt;- as.numeric(as.character(df_counts[,1]))
-    y &lt;- as.numeric(as.character(df_counts[,1]))
+    x &lt;- as.numeric(as.character(df_counts[, 1]))
+    y &lt;- as.numeric(as.character(df_counts[, 1]))
   })
   qplot(x, y, data = df_counts, colour = count)
 }</pre></li>
