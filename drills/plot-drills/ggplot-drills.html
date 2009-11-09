@@ -14,7 +14,7 @@
 <h1>stat405</h1>
 <h2 class="subhead">ggplot2 drills, by Garrett Grolemund</h2>
 
-<p>Recreate the graphs below by building them up layer by layer with ggplot2 commands.</p>
+<p>Recreate the graphs below by building them up layer by layer with ggplot2 commands. Some graphs will require you to manipulate the data set before graphing.</p>
 
 <h2>Airlines data set</h2>
 
@@ -59,6 +59,55 @@ ggplot(feb13, aes(ntot, ncancel)) +
   geom_smooth(method = "lm", se = T) +
   labs(y = "Number of flights cancelled", 
     x = "Total number of flights")
+</pre></li>
+
+  <li><img src = "ggplots/airmap16.png" alt = "graph" width = "450" height = "300">
+    
+  <pre class="answer">
+lower48 <- subset(feb13, long > -130)
+lower48 <- subset(lower48, lat > 20)
+
+ggplot(subset(lower48, ntot >= 100), aes(long, lat)) +
+  borders("state") +
+  geom_point(aes(size = ndelay, colour = log(avgdelay)))
+</pre></li>
+
+  <li><img src = "ggplots/longdelay17.png" alt = "graph" width = "450" height = "300">
+    
+  <pre class="answer">
+ggplot(feb13, aes(long, cperc)) +
+  geom_point(aes(colour = cperc, size = ntot)) + 
+  geom_text(data = subset(feb13, cperc > 0.4 & long < -100),
+    aes(label = origin), hjust = 1.2, angle = -45, 
+    colour = "orange")
+</pre></li>
+
+  <li><img src = "ggplots/longtot18.png" alt = "graph" width = "450" height = "300">
+    
+    
+  <p class="hint">Specify <code>stat = "density"</code> to generate the <code>..density..<code> variable.</p>  
+  <pre class="answer">
+ggplot(feb13, aes(long, ntot)) +
+  geom_area(aes(y = ..density..), stat = "density", alpha = 0.5) +
+  geom_vline(xintercept = c(-118, -87)) +
+  geom_text(aes(x,y, label = "Los Angeles"), 
+    data = data.frame(x = - 119, y = 0), size = 4, hjust = 0,
+    vjust = 0, angle = 90) +
+  geom_text(aes(x,y, label = "Chicago"), 
+    data = data.frame(x = -88, y = 0), size = 4, hjust = 0, 
+    vjust = 0, angle = 90)
+</pre></li>
+
+  <li><img src = "ggplots/topairports19.png" alt = "graph" width = "450" height = "300">
+    
+    
+  <p class="hint">Ensure you specified <code>stringsAsFactors = F</code> when you read in the data set.</p>  
+  <pre class="answer">
+main <- subset(feb13, ntot > 400)
+
+ggplot(main, aes(origin, ntot)) +
+  geom_bar(aes(fill = cperc)) +
+  opts(axis.text.x = theme_text(angle = 90, hjust = 1))
 </pre></li>
 
 
@@ -120,6 +169,164 @@ ggplot(diamonds, aes(clarity)) +
   facet_grid(cut ~ .)  
 </pre></li>
 
+  <li><img src = "ggplots/pie20.png" alt = "graph" width = "450" height = "300">
+
+  <p class="hint">To make a bar graph of the whole data set, specify <code>aes(x = "", ...)</code>. What happens to the bar when you switch the x or y axis to polar coordinates?</pre></p>  
+  <pre class="answer">
+ggplot(diamonds, aes(x = "", fill = cut)) + 
+  geom_bar(width = 1) + 
+  coord_polar(theta = "y")  
+</pre></li>
+
+
+
+<h2>Batting data set</h2>
+
+  <li><img src = "ggplots/battile6.png" alt = "graph" width = "450" height = "300">
+
+  <p class="hint">Consider <code>stat_density2d(..., contour = F)</code>. </p>  
+  <pre class="answer">
+ggplot(b, aes(year, g)) +
+  stat_density2d(geom = "tile", aes(fill = ..density..), contour = F) +
+  scale_fill_gradient(low = "black", high = "white") 
+</pre></li>
+
+  <li><img src = "ggplots/hrline7.png" alt = "graph" width = "450" height = "300">
+
+  <p class="hint"><pre>  
+yankees <- subset(b, team == "NYA")
+yankees <- transform(yankees, team = "Yankees")
+boston <- subset(b, team == "BOS")
+boston <- transform(boston, team = "Red Sox")
+yb <- rbind(yankees, boston)
+
+yb_runs <- ddply(yb, c("year", "team"), summarise,
+  total_runs = sum(r, na.rm = T)) 
+</pre></p>
+
+  <pre class="answer">
+ggplot(yb_runs, aes(year, total_runs)) +
+  geom_smooth(aes(colour = team)) +
+  scale_colour_manual(value = c("red", "blue")) +
+  geom_vline(aes(xintercept = c(1918, 2004))) +
+  geom_text(aes(x,y, label = "Curse Begins"), 
+    data = data.frame(x = 1917, y = 400), size = 3, hjust = 0,
+    vjust = 0, angle = 90) +
+  geom_text(aes(x,y, label = "Curse Ends"), 
+    data = data.frame(x = 2003, y = 400), size = 3, hjust = 0, 
+    vjust = 0, angle = 90)
+</pre></li>
+
+  <li><img src = "ggplots/hrbars8.png" alt = "graph" width = "450" height = "300">
+ 
+  <pre class="answer">
+yb_homeruns <- ddply(yb, c("year", "team"), summarise,
+  total_hr = sum(hr, na.rm = T)) 
+
+
+ggplot(yb_homeruns, aes(year, total_hr)) +
+  geom_bar(aes(fill = team), stat = "identity", position = "dodge") + 
+  scale_fill_manual(value = alpha(c("red", "blue"), 0.4)) +
+  geom_smooth(aes(colour = team)) +
+  scale_colour_manual(value = c("red", "blue")) 
+</pre></li>
+
+  <li><img src = "ggplots/hrarea9.png" alt = "graph" width = "450" height = "300">
+ 
+  <p class="hint">Consider <code>scale_fill_manual()</code>. </p>   
+  <pre class="answer">
+ggplot(yb_homeruns, aes(year, total_hr)) +
+  geom_area(aes(fill = team), position = "identity") +
+  scale_fill_manual(value = alpha(c("red", "blue"), 0.4)) +
+    geom_vline(aes(xintercept = 1918)) +
+  geom_text(aes(x,y, label = "Curse Begins"), 
+    data = data.frame(x = 1919, y = -10), size = 3, hjust = 0,
+    vjust = 0)
+</pre></li>
+
+
+  <li><img src = "ggplots/hrcurse10.png" alt = "graph" width = "450" height = "300">
+    
+  <pre class="answer">
+yb_curse <- subset(yb, year > 1918 & year <= 2004)
+yb_curse <- transform(yb_curse, curse = "Curse years") 
+
+yb_noncurse <- subset(yb, year <= 1918 | year > 2004)
+yb_noncurse <- transform(yb_noncurse, curse = "Non-curse Years") 
+
+yb <- rbind(yb_curse, yb_noncurse)
+
+ggplot(yb, aes(team, hr / r)) +
+  geom_boxplot() +
+  facet_grid( . ~ curse) 
+</pre></li>
+
+<h2>Players data set (or combined players/batting)</h2>
+
+  <li><img src = "ggplots/playermap11.png" alt = "graph" width = "450" height = "300">
+ 
+  <p class="hint"><pre>
+library(maps)
+world_map <- map_data("world")
+names(world_map)[5] <- "country"
+
+p_country <- ddply(p, "country", summarise, total = length(country))
+
+p_map <- merge(p_country, world_map, by = "country", all = T)
+p_map <- p_map[order(p_map$order), ]
+</pre></p>   
+  <pre class="answer">
+ggplot(p_map, aes(long, lat)) +
+  geom_polygon(aes(group = group, fill = log(total)), colour = "grey60", size = .3) +
+  ylim(-55, 85)
+</pre></li>
+
+
+  <li><img src = "ggplots/statefill12.png" alt = "graph" width = "450" height = "300">
+
+  <p class="hint">Use <code> stat = "bin"</code> to generate the <code>..count..</code> variable.</p>   
+  <pre class="answer">
+bp <- merge(b, p, by = "id")
+bp_country <- ddply(bp, "country", summarise, total = length(country))
+bp_country <- bp_country[order(-bp_country$total), ]
+bp_10 <- subset(bp, country %in% bp_country[2:11, 1])
+
+
+ggplot(bp_10, aes(year)) +
+  geom_area(aes(y = ..count.., fill = country), stat = "bin", binwidth = 10, position = "stack") + 
+  opts(title = "10 most represented foreign countries in combined dataset") +
+  xlab("year (bin = 10 years)") 
+</pre></li>
+
+  <li><img src = "ggplots/hand13.png" alt = "graph" width = "450" height = "300">
+   
+  <pre class="answer">
+bp_trimmed <- subset(bp, bats != "")
+ggplot(bp_trimmed, aes(throws)) +
+  geom_bar() + 
+  facet_grid (. ~ bats) +
+  opts(title = "Hand preference by batting preference")
+</pre></li>
+
+  <li><img src = "ggplots/soheight14.png" alt = "graph" width = "450" height = "300">
+   
+  <pre class="answer">
+ggplot(bp, aes(height, so)) +
+  geom_jitter(position = position_jitter(width = 5), alpha = 0.05) +
+  xlim(60, 85)
+</pre></li>
+
+
+  <li><img src = "ggplots/hrweight15.png" alt = "graph" width = "450" height = "300">
+   
+  <pre class="answer">
+ggplot(subset(bp, hr > 60), aes(weight, hr)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  geom_text(aes(label = paste(first, last, sep = " ")), hjust = -0.1) +
+  xlim(203, 233) +
+  opts(title = "Weight vs. performance among record holders")
+</pre></li>
 
 
 </ol>
