@@ -14,18 +14,20 @@
 <h1>stat405</h1>
 <h2 class="subhead">ggplot2 drills, by Garrett Grolemund</h2>
 
-<p>Recreate the graphs below by building them up layer by layer with ggplot2 commands. Some graphs will require you to manipulate the data set before graphing.</p>
+<p>Recreate the graphs below by building them up layer by layer with ggplot2 commands.</p>
 
 <h2>Airlines data set</h2>
 
 <ol>
-  <li><img src = "ggplots/texmap1.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following plot of flight delays in Texas.</p>
     
-  <p class="hint">Use <pre>
-library(maps)
-texas &lt;- map_data("state", "texas")
-</pre>
+    <img src = "plot-drills/ggplots/texmap1.png" alt = "graph" width = "450" height = "300">
+    
+  <p class="hint">Use <br />
+<code>library(maps)<br />
+texas &lt;- map_data("state", "texas")</code><br />
 to retrieve the coordinates necessary to make a polygon in the shape of Texas.</p>
+
   <pre class="answer">
 texas &lt;- map_data("state", "texas")
 texmap &lt;- c(
@@ -44,10 +46,7 @@ ggplot(feb13, aes(long, lat)) +
   scale_colour_gradient("percent delayed")
 </pre></li>
 
-
-
-
-  <li><img src = "ggplots/airports2.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/airports2.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 ggplot(feb13, aes(ntot, ncancel)) + 
@@ -61,7 +60,7 @@ ggplot(feb13, aes(ntot, ncancel)) +
     x = "Total number of flights")
 </pre></li>
 
-  <li><img src = "ggplots/airmap16.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/airmap16.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 lower48 <- subset(feb13, long > -130)
@@ -72,7 +71,7 @@ ggplot(subset(lower48, ntot >= 100), aes(long, lat)) +
   geom_point(aes(size = ndelay, colour = log(avgdelay)))
 </pre></li>
 
-  <li><img src = "ggplots/longdelay17.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/longdelay17.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 ggplot(feb13, aes(long, cperc)) +
@@ -82,7 +81,7 @@ ggplot(feb13, aes(long, cperc)) +
     colour = "orange")
 </pre></li>
 
-  <li><img src = "ggplots/longtot18.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/longtot18.png" alt = "graph" width = "450" height = "300">
     
     
   <p class="hint">Specify <code>stat = "density"</code> to generate the <code>..density..<code> variable.</p>  
@@ -98,7 +97,7 @@ ggplot(feb13, aes(long, ntot)) +
     vjust = 0, angle = 90)
 </pre></li>
 
-  <li><img src = "ggplots/topairports19.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/topairports19.png" alt = "graph" width = "450" height = "300">
     
     
   <p class="hint">Ensure you specified <code>stringsAsFactors = F</code> when you read in the data set.</p>  
@@ -113,7 +112,7 @@ ggplot(main, aes(origin, ntot)) +
 
 <h2>Baby names data set</h2>
   <li><p>Include the words that appear on the graph.</p>
-  <img src = "ggplots/classnames3.png" alt = "graph" width = "450" height = "300">
+  <img src = "plot-drills/ggplots/classnames3.png" alt = "graph" width = "450" height = "300">
     
   <p class="hint">Start by making the following data set <pre>
 names &lt;- read.csv("baby-names.csv", header = T, stringsAsFactors = F)
@@ -138,7 +137,7 @@ ggplot(class_names, aes(year, percent)) +
 
 
   <li><p>Include the words that appear on the graph.</p>
-  <img src = "ggplots/boxplots4.png" alt = "graph" width = "450" height = "300">
+  <img src = "plot-drills/ggplots/boxplots4.png" alt = "graph" width = "450" height = "300">
     
   <p class="hint">Use the same data set as above</pre></p>
   <p class="hint">Consider using <code>round_any()</code> to make continuous variables discrete.</pre></p>
@@ -157,8 +156,8 @@ ggplot(class_names, aes(year, percent)) +
 
 <h2>Diamonds data set</h2>
   <li><p>Create both graphs then comment on the merits of each one compared to the other.</p>
-  <img src = "ggplots/diamonds5a.png" alt = "graph" width = "450" height = "300">
-  <img src = "ggplots/diamonds5b.png" alt = "graph" width = "450" height = "300">
+  <img src = "plot-drills/ggplots/diamonds5a.png" alt = "graph" width = "450" height = "300">
+  <img src = "plot-drills/ggplots/diamonds5b.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 ggplot(diamonds, aes(clarity)) + 
@@ -169,7 +168,7 @@ ggplot(diamonds, aes(clarity)) +
   facet_grid(cut ~ .)  
 </pre></li>
 
-  <li><img src = "ggplots/pie20.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/pie20.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">To make a bar graph of the whole data set, specify <code>aes(x = "", ...)</code>. What happens to the bar when you switch the x or y axis to polar coordinates?</pre></p>  
   <pre class="answer">
@@ -182,7 +181,7 @@ ggplot(diamonds, aes(x = "", fill = cut)) +
 
 <h2>Batting data set</h2>
 
-  <li><img src = "ggplots/battile6.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/battile6.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">Consider <code>stat_density2d(..., contour = F)</code>. </p>  
   <pre class="answer">
@@ -191,7 +190,7 @@ ggplot(b, aes(year, g)) +
   scale_fill_gradient(low = "black", high = "white") 
 </pre></li>
 
-  <li><img src = "ggplots/hrline7.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hrline7.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint"><pre>  
 yankees <- subset(b, team == "NYA")
@@ -217,7 +216,7 @@ ggplot(yb_runs, aes(year, total_runs)) +
     vjust = 0, angle = 90)
 </pre></li>
 
-  <li><img src = "ggplots/hrbars8.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hrbars8.png" alt = "graph" width = "450" height = "300">
  
   <pre class="answer">
 yb_homeruns <- ddply(yb, c("year", "team"), summarise,
@@ -231,7 +230,7 @@ ggplot(yb_homeruns, aes(year, total_hr)) +
   scale_colour_manual(value = c("red", "blue")) 
 </pre></li>
 
-  <li><img src = "ggplots/hrarea9.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hrarea9.png" alt = "graph" width = "450" height = "300">
  
   <p class="hint">Consider <code>scale_fill_manual()</code>. </p>   
   <pre class="answer">
@@ -245,7 +244,7 @@ ggplot(yb_homeruns, aes(year, total_hr)) +
 </pre></li>
 
 
-  <li><img src = "ggplots/hrcurse10.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hrcurse10.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 yb_curse <- subset(yb, year > 1918 & year <= 2004)
@@ -263,7 +262,7 @@ ggplot(yb, aes(team, hr / r)) +
 
 <h2>Players data set (or combined players/batting)</h2>
 
-  <li><img src = "ggplots/playermap11.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/playermap11.png" alt = "graph" width = "450" height = "300">
  
   <p class="hint"><pre>
 library(maps)
@@ -282,7 +281,7 @@ ggplot(p_map, aes(long, lat)) +
 </pre></li>
 
 
-  <li><img src = "ggplots/statefill12.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/statefill12.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">Use <code> stat = "bin"</code> to generate the <code>..count..</code> variable.</p>   
   <pre class="answer">
@@ -298,7 +297,7 @@ ggplot(bp_10, aes(year)) +
   xlab("year (bin = 10 years)") 
 </pre></li>
 
-  <li><img src = "ggplots/hand13.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hand13.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 bp_trimmed <- subset(bp, bats != "")
@@ -308,7 +307,7 @@ ggplot(bp_trimmed, aes(throws)) +
   opts(title = "Hand preference by batting preference")
 </pre></li>
 
-  <li><img src = "ggplots/soheight14.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/soheight14.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 ggplot(bp, aes(height, so)) +
@@ -317,7 +316,7 @@ ggplot(bp, aes(height, so)) +
 </pre></li>
 
 
-  <li><img src = "ggplots/hrweight15.png" alt = "graph" width = "450" height = "300">
+  <li><img src = "plot-drills/ggplots/hrweight15.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 ggplot(subset(bp, hr > 60), aes(weight, hr)) +
@@ -327,7 +326,6 @@ ggplot(subset(bp, hr > 60), aes(weight, hr)) +
   xlim(203, 233) +
   opts(title = "Weight vs. performance among record holders")
 </pre></li>
-
 
 </ol>
 
