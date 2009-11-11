@@ -46,7 +46,9 @@ ggplot(feb13, aes(long, lat)) +
   scale_colour_gradient("percent delayed")
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/airports2.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following plot of flights cancelled by size of the airport.</p>
+  
+  <img src = "plot-drills/ggplots/airports2.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 ggplot(feb13, aes(ntot, ncancel)) + 
@@ -60,7 +62,9 @@ ggplot(feb13, aes(ntot, ncancel)) +
     x = "Total number of flights")
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/airmap16.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following map of flight delays for airports with 100 or more flights on Feb. 13th.</p>
+  
+  <img src = "plot-drills/ggplots/airmap16.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 lower48 <- subset(feb13, long > -130)
@@ -71,7 +75,9 @@ ggplot(subset(lower48, ntot >= 100), aes(long, lat)) +
   geom_point(aes(size = ndelay, colour = log(avgdelay)))
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/longdelay17.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following plot of cancellations by longitude.</p>
+  
+  <img src = "plot-drills/ggplots/longdelay17.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 ggplot(feb13, aes(long, cperc)) +
@@ -81,7 +87,9 @@ ggplot(feb13, aes(long, cperc)) +
     colour = "orange")
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/longtot18.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following plot of flight volume by longitude.</p>
+  
+  <img src = "plot-drills/ggplots/longtot18.png" alt = "graph" width = "450" height = "300">
     
     
   <p class="hint">Specify <code>stat = "density"</code> to generate the <code>..density..<code> variable.</p>  
@@ -97,7 +105,9 @@ ggplot(feb13, aes(long, ntot)) +
     vjust = 0, angle = 90)
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/topairports19.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following chart for the 11 busiest airports.</p>
+  
+  <img src = "plot-drills/ggplots/topairports19.png" alt = "graph" width = "450" height = "300">
     
     
   <p class="hint">Ensure you specified <code>stringsAsFactors = F</code> when you read in the data set.</p>  
@@ -168,7 +178,9 @@ ggplot(diamonds, aes(clarity)) +
   facet_grid(cut ~ .)  
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/pie20.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following pie chart.</p>
+  
+  <img src = "plot-drills/ggplots/pie20.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">To make a bar graph of the whole data set, specify <code>aes(x = "", ...)</code>. What happens to the bar when you switch the x or y axis to polar coordinates?</pre></p>  
   <pre class="answer">
@@ -181,7 +193,9 @@ ggplot(diamonds, aes(x = "", fill = cut)) +
 
 <h2>Batting data set</h2>
 
-  <li><img src = "plot-drills/ggplots/battile6.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following density map.</p>
+  
+  <img src = "plot-drills/ggplots/battile6.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">Consider <code>stat_density2d(..., contour = F)</code>. </p>  
   <pre class="answer">
@@ -190,7 +204,9 @@ ggplot(b, aes(year, g)) +
   scale_fill_gradient(low = "black", high = "white") 
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/hrline7.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following line graph.</p>
+  
+  <img src = "plot-drills/ggplots/hrline7.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint"><pre>  
 yankees <- subset(b, team == "NYA")
@@ -216,7 +232,9 @@ ggplot(yb_runs, aes(year, total_runs)) +
     vjust = 0, angle = 90)
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/hrbars8.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following line graph super imposed on the bar chart.</p>
+  
+  <img src = "plot-drills/ggplots/hrbars8.png" alt = "graph" width = "450" height = "300">
  
   <pre class="answer">
 yb_homeruns <- ddply(yb, c("year", "team"), summarise,
@@ -230,7 +248,9 @@ ggplot(yb_homeruns, aes(year, total_hr)) +
   scale_colour_manual(value = c("red", "blue")) 
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/hrarea9.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following ovelapping areas graph.</p>
+  
+  <img src = "plot-drills/ggplots/hrarea9.png" alt = "graph" width = "450" height = "300">
  
   <p class="hint">Consider <code>scale_fill_manual()</code>. </p>   
   <pre class="answer">
@@ -244,7 +264,9 @@ ggplot(yb_homeruns, aes(year, total_hr)) +
 </pre></li>
 
 
-  <li><img src = "plot-drills/ggplots/hrcurse10.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following box plots.</p>
+  
+  <img src = "plot-drills/ggplots/hrcurse10.png" alt = "graph" width = "450" height = "300">
     
   <pre class="answer">
 yb_curse <- subset(yb, year > 1918 & year <= 2004)
@@ -262,7 +284,9 @@ ggplot(yb, aes(team, hr / r)) +
 
 <h2>Players data set (or combined players/batting)</h2>
 
-  <li><img src = "plot-drills/ggplots/playermap11.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following map of countries baseball players have come from.</p>
+  
+  <img src = "plot-drills/ggplots/playermap11.png" alt = "graph" width = "450" height = "300">
  
   <p class="hint"><pre>
 library(maps)
@@ -281,7 +305,9 @@ ggplot(p_map, aes(long, lat)) +
 </pre></li>
 
 
-  <li><img src = "plot-drills/ggplots/statefill12.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following chart of the 10 most represented foreign countries in the combined dataset.</p>
+  
+  <img src = "plot-drills/ggplots/statefill12.png" alt = "graph" width = "450" height = "300">
 
   <p class="hint">Use <code> stat = "bin"</code> to generate the <code>..count..</code> variable.</p>   
   <pre class="answer">
@@ -297,7 +323,9 @@ ggplot(bp_10, aes(year)) +
   xlab("year (bin = 10 years)") 
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/hand13.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the side by side bar charts.</p>
+  
+  <img src = "plot-drills/ggplots/hand13.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 bp_trimmed <- subset(bp, bats != "")
@@ -307,7 +335,9 @@ ggplot(bp_trimmed, aes(throws)) +
   opts(title = "Hand preference by batting preference")
 </pre></li>
 
-  <li><img src = "plot-drills/ggplots/soheight14.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following scatterplot.</p>
+  
+  <img src = "plot-drills/ggplots/soheight14.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 ggplot(bp, aes(height, so)) +
@@ -316,7 +346,9 @@ ggplot(bp, aes(height, so)) +
 </pre></li>
 
 
-  <li><img src = "plot-drills/ggplots/hrweight15.png" alt = "graph" width = "450" height = "300">
+  <li><p>Recreate the following comparison of players who have hit more than 60 homeruns in a season.</p>
+  
+  <img src = "plot-drills/ggplots/hrweight15.png" alt = "graph" width = "450" height = "300">
    
   <pre class="answer">
 ggplot(subset(bp, hr > 60), aes(weight, hr)) +
