@@ -16,7 +16,7 @@
 
 <p>Rewrite each code block to comply with the class style guides. 
 <ol>
-  <li>
+  <li><p></p>
         <pre>
 x &lt; - c( 1,-2,3,-4,5,NA )
   y &lt; - x * - 1
@@ -30,7 +30,7 @@ y[y > 0]
 
   
 
-    <li>      <pre>
+    <li><p></p>      <pre>
 n = 1
 mycondition &lt;- round (runif (1,0,1,))
 if( mycondition ) {
@@ -51,7 +51,7 @@ if (my_condition)
   print("false")
 }</pre></li>
   
-  <li>     <pre>
+  <li><p></p>     <pre>
 # create a sequence from 1 to 50
 z &lt;- seq(1,50)
 
@@ -76,7 +76,7 @@ library(ggplot2)
 qplot(z, geom = "histogram", binwidth = 1)</pre></li>
 
 
-  <li>     <pre>
+  <li><p></p>     <pre>
 mat &lt;- matrix( c( 34, 23, 53, 6, 78, 93, 12, 41, 99 ) ,nrow = 3)
 df &lt;- as.data.frame (mat)
 names( df ) <- c("score_given_to_car_on_driving_test", 
@@ -87,12 +87,12 @@ mat &lt;- matrix(c(34, 23, 53, 6, 78, 93, 12, 41, 99), nrow = 3)
 df &lt;- as.data.frame(mat)
 names(df) <- c("car", "van", "truck")</pre></li>
 
-  <li>     <pre>
+  <li><p></p>     <pre>
 library( ggplot2 )
   head(mpg)
 second_version_of_mpg &lt;- mpg[ mpg$cyl = 6,]
 second_version_of_mpg$class &lt;- as.character(mpg2$class)
-qplot(cty, hwy, data=second_version_of_mpg, geom="point", color=class ) + geom_smooth( method = "lm", se=FALSE ) +opts (title="City vs. Highway MPG" )</pre>
+qplot(cty, hwy, data=second_version_of_mpg, geom="point", color=class ) +  geom_smooth( method = "lm", se=FALSE ) + opts (title="City vs. Highway MPG" )</pre>
      <pre class="answer">
 library(ggplot2)
 head(mpg)
