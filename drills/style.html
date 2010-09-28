@@ -14,7 +14,8 @@
 <h1>stat405</h1>
 <h2 class="subhead">Style drills, by Garrett Grolemund</h2>
 
-<p>Rewrite each code block to comply with the class style guides. 
+<p>Rewrite each code block to comply with the <a href="../r-style-guide.html">class style guide</a>.</p>
+ 
 <ol>
   <li><p></p>
         <pre>
@@ -102,7 +103,22 @@ qplot(cty, hwy, data = mpg2, geom = "point", color = class) +
   geom_smooth(method = "lm", se = FALSE) + 
   opts(title = "City vs. Highway MPG")</pre></li>
 
-</li>
+
+  <li><p></p>
+  <pre>
+mean &lt; function(x) {
+sum(x)/length(x)
+}
+  </pre>
+  <pre class = "answer">
+mean &lt; function(x) {
+  sum(x) / length(x)
+}
+  </pre></li>
+
+</ol>
+
+
 
 </div>
 
