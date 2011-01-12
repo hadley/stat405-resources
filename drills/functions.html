@@ -444,14 +444,14 @@ scatterplot &lt;- function(df){
   <li><p> Save the current graph with width = 6 and height = 6 as a pdf with the inputted name.</p>
      <pre class="answer">
 save_plot &lt;- function(name){
-  filename &lt;- paste("name", "pdf", sep = ".")
+  filename &lt;- paste(name, "pdf", sep = ".")
   ggsave(filename, width = 6, height = 6)
 }</pre></li>
 
   <li><p> Save the current graph with a given width and height as a pdf with the inputted name.</p>
      <pre class="answer">
 save_plot2 &lt;- function(name, width, height){
-  filename &lt;- paste("name", "pdf", sep = ".")
+  filename &lt;- paste(name, "pdf", sep = ".")
   ggsave(filename, width = width, height = height)
 }</pre></li>
 
