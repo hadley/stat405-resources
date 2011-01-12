@@ -1,3 +1,3 @@
-.First &lt;- function() {
+.First <- function() {
   options("repos" = c(CRAN = "http://cran.r-project.org/"))
 }
